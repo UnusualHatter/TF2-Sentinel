@@ -2,11 +2,13 @@
   "unique_accounts": 21966,
   "source_records": 32798,
   "flags": 32634,
-  "evidence_rows": 14858,
+  "evidence_rows": 14862,
   "aliases": 11187,
   "server_bans": 3363,
   "registered_sources": 79,
   "data_bearing_sources": 40,
+  "accounts_with_avatar": 18399,
+  "accounts_with_persona": 17619,
   "confidence_tiers": {
     "very_low": 4922,
     "high": 10466,
@@ -15,5 +17,5 @@
     "unscored": 1670,
     "very_high": 1301
   },
-  "generated_at": "2026-08-13T14:13:21-03:00"
+  "generated_at": "2026-08-13T15:28:43-03:00"
 }

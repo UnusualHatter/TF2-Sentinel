@@ -1155,7 +1155,7 @@ steamid64,steam3,aggregate_status,source_count,flags,evidence_count,latest_name,
 76561198021501423,[U:1:61235695],suspicious,1,suspicious,0,,,,
 76561198021573898,[U:1:61308170],flagged_cheater,1,cheater,0,,,,
 76561198021704293,[U:1:61438565],suspicious,3,suspicious,0,,,,
-76561198021896586,[U:1:61630858],flagged_cheater,3,cheater;suspicious,5,[F2P]Incarnate,2019-05-09T13:07:29-03:00,,
+76561198021896586,[U:1:61630858],flagged_cheater,3,cheater;suspicious,7,[F2P]Incarnate,2019-05-09T13:07:29-03:00,,
 76561198022046226,[U:1:61780498],flagged_cheater,2,cheater,1,alittlehuang,2023-05-29T12:07:46Z,2023-05-29T12:07:46Z,2023-05-29T12:07:46Z
 76561198022053157,[U:1:61787429],other,1,clear,0,,,,
 76561198022095731,[U:1:61830003],suspicious,2,suspicious,0,,,,
@@ -5721,7 +5721,7 @@ steamid64,steam3,aggregate_status,source_count,flags,evidence_count,latest_name,
 76561198353420900,[U:1:393155172],flagged_cheater,1,cheater,0,,,,
 76561198353435243,[U:1:393169515],other,1,server_ban,2,save me from me,2018-05-11T13:12:05-03:00,2018-05-11T13:12:05-03:00,2018-05-11T13:12:05-03:00
 76561198353443172,[U:1:393177444],flagged_cheater,1,cheater,0,,,,
-76561198353460771,[U:1:393195043],flagged_cheater,2,cheater,5,celi,2021-10-30T00:17:26-03:00,2021-10-30T00:17:26-03:00,2021-10-30T00:17:26-03:00
+76561198353460771,[U:1:393195043],flagged_cheater,2,cheater,7,celi,2021-10-30T00:17:26-03:00,2021-10-30T00:17:26-03:00,2021-10-30T00:17:26-03:00
 76561198353552173,[U:1:393286445],flagged_cheater,1,cheater,0,fly little monkey wit drip,2021-02-25T03:35:01Z,2021-02-25T03:35:01Z,2021-02-25T03:35:01Z
 76561198353614035,[U:1:393348307],flagged_cheater,1,cheater,0,shasta bot 4,2020-07-03T18:09:09Z,2020-07-03T18:09:09Z,2020-07-03T18:09:09Z
 76561198353725622,[U:1:393459894],suspicious,1,suspicious,0,,,,
