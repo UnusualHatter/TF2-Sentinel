@@ -1,4 +1,4 @@
--- Holiday CheaterDB - PostgreSQL schema
+-- TF2 Sentinel - PostgreSQL schema
 -- Labels in this database are source assertions, not independent findings.
 
 CREATE TABLE sources (

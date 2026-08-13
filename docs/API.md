@@ -1,45 +1,35 @@
 # Static data interface
 
-The repository exposes dependency-free machine-readable files suitable for GitHub raw URLs or GitHub Pages.
+TF2 Sentinel publishes dependency-free JSON under `docs/data/`, suitable for GitHub Pages, raw GitHub URLs or small client integrations.
 
-## Accounts
+## `data/accounts.json`
 
-`data/public/accounts.json` and `docs/data/accounts.json` contain one object per SteamID64.
+One object per canonical SteamID64.
 
-Fields:
+Important fields:
 
-- `steamid64`: canonical SteamID64
-- `steam3`: Steam3 form
-- `latest_name`: latest public alias observed in the imported data
-- `steam_persona_name`: current public Steam persona name when profile enrichment is available
-- `steam_profile_url`: public Steam Community profile URL
-- `steamhistory_url`: SteamHistory lookup URL for the SteamID64
-- `avatar_url`: public Steam avatar URL when profile enrichment is available
-- `confidence_score`: 0-100 corroboration score
-- `confidence_tier`: `unscored`, `very_low`, `low`, `medium`, `high`, or `very_high`
-- `independent_source_groups`: number of independently counted source families
-- `raw_source_signals`: number of source signals before de-duplication
-- `evidence_count`: stored public evidence/note rows
-- `flags`: semicolon-delimited imported classifications
-- `strongest_sources`: semicolon-delimited source slugs
+- `steamid64`, `steam3`
+- `latest_name`, `steam_persona_name`
+- `avatar_url` when Steam enrichment has been run; profile/history links can be constructed from `steamid64`
+- `confidence_score`, `confidence_tier`
+- `independent_source_groups`, `source_count`, `raw_source_signals`
+- `evidence_count`, `flags`
+- `primary_source`, `strongest_sources`, `all_sources`
 
-## Sources
+`primary_source`, `strongest_sources` and `all_sources` contain source slugs. Resolve them against `sources.json` instead of parsing source display text.
 
-`data/public/sources.json` and `docs/data/sources.json` expose the source catalog and confidence metadata, including source URL, weight, evidence class, independence group, mirror status, and assessment method.
+## `data/sources.json`
 
-## Metadata
+The source catalog plus scoring metadata. Source slugs are stable integration keys. Fields include upstream URL, source type, region, base weight, independence group, whether the source counts toward confidence, mirror state and assessment method.
 
-`data/public/meta.json` and `docs/data/meta.json` expose snapshot metadata used by the GitHub Pages viewer.
+## `data/servers.json`
 
-Fields:
+Reference catalog for the South American servers tracked by this snapshot. A server entry is not a moderation assertion. `public_moderation_url` is only present where a public ban system was located.
 
-- `last_database_update`: update date in `YYYY-MM-DD`
-- `last_database_update_display`: human-readable update date
-- `generated_at`: snapshot generation timestamp
-- `timezone`: timezone used for the update date
-- `unique_accounts`: number of unique SteamID64 records
-- `registered_sources`: number of source catalog entries
+## `data/meta.json`
+
+Snapshot metadata used by the site, including the database update date, generation timestamp, account count and source count.
 
 ## Stability
 
-Consumers should key accounts by `steamid64` and sources by `slug`. New fields may be added without notice; existing field meanings should remain stable.
+Consumers should key accounts by `steamid64` and sources by `slug`. New fields may be added without notice. Display names are allowed to change as source labels are normalized; do not use them as identifiers.

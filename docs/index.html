@@ -3,58 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Searchable TF2 moderation-signal database with source provenance and confidence scoring.">
-<title>Holiday CheaterDB</title>
+<meta name="description" content="TF2 Sentinel is a searchable index of public TF2 moderation and cheating-related source signals.">
+<meta name="theme-color" content="#0d1117">
+<title>TF2 Sentinel</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<main>
-<header>
-<div class="header-row">
-<div>
-<h1>Holiday CheaterDB</h1>
-<p>TF2 moderation signals with source provenance and confidence scoring.</p>
-</div>
-<div class="db-update" id="last-update">Last database update: August 12, 2026</div>
-</div>
+<body class="with-sticky-tools accounts-page">
+<main class="page-shell">
+<header class="site-header">
+  <div class="brand">
+    <img class="brand-logo" src="assets/sentinel-logo.png" alt="" width="58" height="58">
+    <div>
+      <h1>TF2 Sentinel</h1>
+      <p>Public TF2 moderation signals, normalized by SteamID64 and source.</p>
+    </div>
+  </div>
+  <div class="db-update" id="last-update">Last database update: —</div>
 </header>
-<section class="controls">
-<input id="q" type="search" placeholder="SteamID64, Steam3, name or source" autocomplete="off">
-<select id="tier">
-<option value="">All confidence tiers</option>
-<option value="very_high">Very high</option>
-<option value="high">High</option>
-<option value="medium">Medium</option>
-<option value="low">Low</option>
-<option value="very_low">Very low</option>
-<option value="unscored">Unscored</option>
-</select>
-</section>
-<div id="stats" class="stats"></div>
+
+<div class="sticky-tools">
+  <section class="controls" aria-label="Database filters">
+    <label class="search-field">
+      <span class="sr-only">Search accounts</span>
+      <input id="q" type="search" placeholder="Search SteamID64, Steam3, player name or source" autocomplete="off" spellcheck="false">
+    </label>
+    <label class="tier-field">
+      <span class="sr-only">Confidence tier</span>
+      <select id="tier">
+        <option value="">All confidence tiers</option>
+        <option value="very_high">Very high</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+        <option value="very_low">Very low</option>
+        <option value="unscored">Unscored</option>
+      </select>
+    </label>
+  </section>
+  <div class="result-bar">
+    <div id="stats" class="stats" aria-live="polite">Loading database…</div>
+    <div class="pager" id="pager-top" aria-label="Results pages"></div>
+  </div>
+</div>
+
 <div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Player</th>
-<th>SteamID64</th>
-<th>Confidence</th>
-<th>Steam</th>
-<th>Source</th>
-<th>Signals</th>
-<th>Evidence</th>
-</tr>
-</thead>
-<tbody id="rows"></tbody>
+<table class="account-table">
+  <colgroup>
+    <col class="col-player">
+    <col class="col-steamid">
+    <col class="col-confidence">
+    <col class="col-links">
+    <col class="col-source">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>SteamID64</th>
+      <th>Confidence</th>
+      <th>Links</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
 </table>
 </div>
-<footer>
-<a href="data/accounts.json">accounts.json</a>
-<span>·</span>
-<a href="sources.html">sources</a>
-<span>·</span>
-<a href="data/sources.json">sources.json</a>
-<span>·</span>
-<a href="data/meta.json">meta.json</a>
+
+<div class="bottom-bar">
+  <div class="pager" id="pager-bottom" aria-label="Results pages"></div>
+</div>
+
+<footer class="site-footer">
+  <a href="data/accounts.json">accounts.json</a>
+  <a href="sources.html">sources</a>
+  <a href="servers.html">South America servers</a>
+  <a href="data/meta.json">snapshot metadata</a>
 </footer>
 </main>
 <script src="app.js"></script>

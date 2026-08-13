@@ -1,0 +1,93 @@
+{
+  "tf2bd_playerlists": [
+    {
+      "source_id": 71,
+      "slug": "minein4-shitlist",
+      "url": "https://raw.githubusercontent.com/minein4/Shitlist/main/playerlist.shitlist.json"
+    },
+    {
+      "source_id": 72,
+      "slug": "garou3299-tf2bd-database",
+      "url": "https://raw.githubusercontent.com/Garou3299/tf2bd-database/master/playerlist.garou3299.json"
+    },
+    {
+      "source_id": 60,
+      "slug": "horizon-australia-tf2-cheaters",
+      "url": "https://raw.githubusercontent.com/HorizonAUSanticheat/Australia-TF2-Cheaters/refs/heads/main/playerlist.official.json"
+    }
+  ],
+  "sourcebans": [
+    {
+      "source_id": 42,
+      "slug": "serv-dos-brother-sourcebans",
+      "url": "https://bans.svdosbrothers.com/"
+    },
+    {
+      "source_id": 77,
+      "slug": "zm-brasil-sourcebans",
+      "url": "https://zmbr.mjsv.us/"
+    },
+    {
+      "source_id": 30,
+      "slug": "skial-sourcebans",
+      "url": "https://www.skial.com/sourcebans/"
+    },
+    {
+      "source_id": 31,
+      "slug": "blackwonder-sourcebans",
+      "url": "https://bans.blackwonder.tf/"
+    },
+    {
+      "source_id": 36,
+      "slug": "panda-sourcebans",
+      "url": "https://bans.panda-community.com/"
+    },
+    {
+      "source_id": 37,
+      "slug": "jumpacademy-sourcebans",
+      "url": "https://bans.jumpacademy.tf/"
+    },
+    {
+      "source_id": 39,
+      "slug": "loos-sourcebans",
+      "url": "https://sb.looscommunity.com/"
+    },
+    {
+      "source_id": 41,
+      "slug": "castaway-sourcebans",
+      "url": "https://castaway.tf/bans/"
+    },
+    {
+      "source_id": 57,
+      "slug": "mtrn-sourcebans",
+      "url": "https://mtrn.hu/sourcebans/"
+    },
+    {
+      "source_id": 78,
+      "slug": "electric-servers-sourcebans",
+      "url": "https://electricservers.com.ar/bans/"
+    }
+  ],
+  "provenance_only": [
+    {
+      "source_id": 73,
+      "slug": "star-cheater-database",
+      "url": "https://github.com/starshipsystems/tf2-cheater-list"
+    },
+    {
+      "source_id": 74,
+      "slug": "ill5-megascatterbomb-mirror",
+      "url": "https://github.com/ill5-com/megascatterbomb-tf2-cheater-database"
+    },
+    {
+      "source_id": 75,
+      "slug": "nemesis-playerlist",
+      "url": "https://nemesis.surf/playerlist.nemesis.json"
+    },
+    {
+      "source_id": 76,
+      "slug": "megaanticheat-project",
+      "url": "https://github.com/oenu/MegaAntiCheat"
+    }
+  ]
+}

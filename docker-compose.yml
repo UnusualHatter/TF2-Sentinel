@@ -3,8 +3,8 @@ services:
     image: postgres:17-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-cheaterdb}
-      POSTGRES_USER: ${POSTGRES_USER:-cheaterdb}
+      POSTGRES_DB: ${POSTGRES_DB:-tf2sentinel}
+      POSTGRES_USER: ${POSTGRES_USER:-tf2sentinel}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
@@ -12,7 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cheaterdb} -d ${POSTGRES_DB:-cheaterdb}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tf2sentinel} -d ${POSTGRES_DB:-tf2sentinel}"]
       interval: 5s
       timeout: 5s
       retries: 10

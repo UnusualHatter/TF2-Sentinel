@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="South American TF2 server references tracked by TF2 Sentinel.">
+<meta name="theme-color" content="#0d1117">
+<title>South America servers · TF2 Sentinel</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page-shell">
+<header class="site-header">
+  <div class="brand"><img class="brand-logo" src="assets/sentinel-logo.png" alt="" width="58" height="58"><div><h1>South America servers</h1><p>Server references used to look for public moderation and cheating-ban records.</p></div></div>
+  <div class="db-update" id="last-update">Last database update: —</div>
+</header>
+<div class="table-wrap"><table class="server-table"><thead><tr><th>Server</th><th>Country</th><th>Address</th><th>Public moderation data</th></tr></thead><tbody id="rows"></tbody></table></div>
+<footer class="site-footer"><a href="index.html">accounts</a><a href="sources.html">sources</a><a href="data/servers.json">servers.json</a></footer>
+</main>
+<script>
+'use strict';
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+Promise.all([fetch('data/servers.json').then(r=>r.json()),fetch('data/meta.json',{cache:'no-store'}).then(r=>r.json())]).then(([data,meta])=>{
+ document.getElementById('last-update').textContent=`Last database update: ${meta.last_database_update_display||'—'}`;
+ document.getElementById('rows').innerHTML=data.map(row=>{
+ const linkLabel=/sourcebans|banlist/i.test(`${row.public_moderation_url||''} ${row.notes||''}`)?'Ban list':'Moderation site';
+ const link=row.public_moderation_url?`<a href="${esc(row.public_moderation_url)}" target="_blank" rel="noreferrer">${linkLabel}</a>`:`<span class="muted">No public ban list located</span>`;
+ const note=row.notes?`<div class="server-note">${esc(row.notes)}</div>`:'';
+ return `<tr><td>${esc(row.server_name)}</td><td>${esc(row.country)}</td><td class="mono">${esc(row.address)}</td><td>${link}${note}</td></tr>`;
+}).join('');
+});
+</script>
+</body>
+</html>

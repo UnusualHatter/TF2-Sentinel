@@ -1,9 +1,23 @@
 # Data model
 
-`accounts` contains one canonical Steam account per SteamID64. `source_records` preserves the exact imported record and raw Steam identifier from each upstream list. `flags` stores what each source asserted (`cheater`, `suspicious`, `exploiter`, etc.); imported flags are **not** automatically treated as verified. `aliases` stores source-observed persona names with timestamps. `evidence` stores upstream proof/note strings separately so evidence is not conflated with classification.
+The normalized CSV data and PostgreSQL schema use the same basic model.
 
-`reviews` is for your own later moderation decisions. `servers` and `bans` are designed for South American community-server/SourceBans imports.
+- `accounts` — one canonical row per SteamID64.
+- `aliases` — names observed by a source, optionally with a timestamp.
+- `sources` — upstream source catalog.
+- `source_profiles` — confidence weight, independence group and assessment rules for each source.
+- `source_records` — raw imported source records kept for provenance.
+- `flags` — classifications asserted by a source (`cheater`, `bot`, `suspicious`, `watched`, `exploiter`, and related values).
+- `evidence` — public proof/note/ban-reason material kept separately from classifications.
+- `reviews` — optional local moderation decisions that can override imported state without destroying provenance.
+- `servers` / `bans` — PostgreSQL tables for public community-server moderation records.
 
-The `v_account_detail` view is the safe default query surface. Its `aggregate_status` deliberately uses names such as `flagged_cheater`, not `confirmed_cheater`.
+## Confidence
 
-`v_effective_account` overlays the latest manual review on top of imported source flags, so accepted appeals or a `clear` review can be represented without deleting source history.
+Only active flags from sources marked `counts_toward_confidence=true` contribute. Each source has an `independence_group`; if several imported or mirrored sources belong to the same family, only the strongest contribution from that family counts.
+
+The score is designed to summarize corroboration, not to convert every imported list entry into a confirmed verdict.
+
+## Public view
+
+The static site consumes generated files under `docs/data/`. PostgreSQL consumers should generally start with `v_account_detail` or `v_effective_account` instead of reconstructing source joins themselves.
