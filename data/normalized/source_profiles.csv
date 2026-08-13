@@ -29,7 +29,7 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 28,88,strong,rentamedic-curated,true,false,curated-database,2026-08-12,
 29,0,none,rentamedic-aggregator,false,true,aggregator,2026-08-12,
 30,80,strong,skial,true,false,community-cheat-ban,2026-08-12,
-31,92,strong,blackwonder,true,false,anti-cheat-detection,2026-08-12,
+31,92,strong,blackwonder,true,false,anti-cheat-detection,2026-08-12,Targeted lookups only; the full BlackWonder catalog has not been synced into this snapshot.
 32,90,strong,ugc,true,false,league-conviction,2026-08-12,
 33,0,none,ugc-mirror,false,true,mirror-index,2026-08-12,
 34,80,strong,phoenixgaming,true,false,community-cheat-ban,2026-08-12,
@@ -41,7 +41,7 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 40,80,strong,gfl,true,false,community-cheat-ban,2026-08-12,
 41,92,strong,castaway,true,false,anti-cheat-detection,2026-08-12,
 42,85,strong,serv-dos-brother,true,false,community-cheat-ban,2026-08-13,Only active explicit cheating/anti-cheat reasons count; duplicate-account and unrelated moderation bans are excluded.
-43,82,strong,vovo-fortress,true,false,community-cheat-ban,2026-08-12,
+43,82,strong,vovo-fortress,true,false,community-cheat-ban,2026-08-12,"The community links a SourceBans install at sbans.vovo.tf, which did not resolve when this snapshot was built."
 44,80,strong,eotl,true,false,community-cheat-ban,2026-08-12,
 45,92,strong,etf2l,true,false,league-conviction,2026-08-12,
 46,92,strong,rgl,true,false,league-conviction,2026-08-12,
@@ -61,7 +61,7 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 60,75,moderate,horizon-australia,true,false,curated-playerlist,2026-08-12,Preserve cheater vs suspicious distinction from source.
 61,92,strong,nocrex-tom,true,false,reviewer-confirmed-report,2026-08-12,Treat as a source assertion backed by the project review process; preserve provenance and appeal/reversal state when available.
 62,85,strong,bots-tf,true,false,compiled-bot-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
-63,85,strong,d3fc0n6-direct,true,false,compiled-cheater-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+63,10,very_weak,cheaterlist-association,true,true,association,2026-08-12,"Compiled copy of the d3fc0n6 CheaterFriend association list; same SteamID set as source 1, so it shares that independence group and weight."
 64,12,very_weak,tacobot,true,false,compiled-community-report-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
 65,92,strong,pazer-official,true,false,compiled-curated-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
 66,72,moderate,megacheaterdb,true,false,compiled-curated-database,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
@@ -75,5 +75,6 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 74,0,mirror,megacheaterdb,false,true,Mirror/derivative of MegaScatterBomb/MCDB data.,2026-08-13,Provenance only.
 75,0,aggregator,nemesis-aggregator,false,true,Consolidated TF2BD list with mixed upstream provenance.,2026-08-13,Does not count independently until record-level provenance is separated.
 76,0,reference,megaanticheat,false,false,Project/ecosystem reference; no released public account export seeded.,2026-08-13,
-77,90,strong,zm-brasil,true,false,Active public SourceBans records with explicit cheating/anti-cheat reasons.,2026-08-13,SourceSleuth duplicate-account bans and non-cheating moderation reasons are excluded.
-78,90,strong,electric-servers-sourcebans,true,false,explicit_cheating_ban,2026-08-13,Only active bans with an explicit cheating or anti-cheat reason should be imported; reversed/unbanned records are excluded.
+77,90,strong,zm-brasil,true,false,community-cheat-ban,2026-08-13,SourceSleuth duplicate-account bans and non-cheating moderation reasons are excluded.
+78,90,strong,electric-servers,true,false,community-cheat-ban,2026-08-13,Host did not resolve when this snapshot was built; registered for provenance only.
+79,85,strong,oppressive-territory,true,false,community-cheat-ban,2026-08-13,Only bans whose stated reason is a cheating determination carry weight.

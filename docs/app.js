@@ -25,6 +25,12 @@ function esc(value) {
   })[char]);
 }
 
+const FLAG_LABELS = {
+  server_ban: 'Server ban (not cheating)',
+  clear: 'Listed as legitimate',
+  cheater_supporter: 'Cheater supporter'
+};
+
 function tierLabel(value) {
   const text = String(value || 'unscored').replaceAll('_', ' ');
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -38,6 +44,10 @@ function sourceUrl(source) {
   return source?.upstream_repo || source?.update_url || '';
 }
 
+function isScoring(source) {
+  return source?.counts_toward_confidence === 'true';
+}
+
 function sourceBadge(source) {
   if (!source) return 'Source';
   const slug = String(source.slug || '').toLowerCase();
@@ -46,7 +56,7 @@ function sourceBadge(source) {
 
   if (slug === 'valve-vac-ban') return 'VAC';
   if (slug === 'valve-tf2-game-ban') return 'Game ban';
-  if (type === 'sourcebans') return 'Server ban';
+  if (type === 'sourcebans' || type === 'community_bans') return 'Server ban';
   if (type === 'league_bans' || /(rgl|etf2l|ugc|ozfortress|brasil-fortress)/.test(slug)) return 'League ban';
   if (type === 'reviewed_report_database' || method.includes('reviewer-confirmed')) return 'Reviewed';
   if (type === 'mvm_reputation' || /(mvmlobby|metalstats|tacobot)/.test(slug)) return 'MvM';
@@ -54,7 +64,6 @@ function sourceBadge(source) {
   if (/(pazer|tf2-bot-detector|tf2bd-trusted|minein4|garou3299|horizon)/.test(slug)) return 'TF2BD';
   if (type === 'tf2bd_playerlist') return 'TF2BD';
   if (type === 'compiled_playerlist' || type === 'public_playerlist' || type === 'community_list' || type === 'curated_database') return 'Player list';
-  if (type === 'community_bans') return 'Community ban';
   if (type === 'profile_history_enrichment') return 'History';
   if (type === 'aggregator' || type === 'mirror_index') return 'Reference';
   if (type === 'project_reference') return 'Project';
@@ -65,16 +74,32 @@ function sourceName(source, slug) {
   return source?.name || slug || 'Unknown source';
 }
 
-function sourceAnchor(source, slug) {
-  const name = sourceName(source, slug);
+function sourceAnchor(source, slug, full) {
+  const label = full ? sourceName(source, slug) : (source?.short_name || sourceName(source, slug));
+  const title = sourceName(source, slug);
   const url = sourceUrl(source);
   return url
-    ? `<a class="source-link" href="${esc(url)}" target="_blank" rel="noreferrer">${esc(name)}</a>`
-    : `<span class="source-name">${esc(name)}</span>`;
+    ? `<a class="source-link" href="${esc(url)}" target="_blank" rel="noreferrer" title="${esc(title)}">${esc(label)}</a>`
+    : `<span class="source-name" title="${esc(title)}">${esc(label)}</span>`;
+}
+
+function splitList(value) {
+  return [...new Set(String(value || '').split(';').map(v => v.trim()).filter(Boolean))];
 }
 
 function getAllSourceSlugs(row) {
-  return [...new Set(String(row.all_sources || '').split(';').map(v => v.trim()).filter(Boolean))];
+  return splitList(row.all_sources);
+}
+
+// Sources that state a cheating determination, strongest first, then the rest.
+function orderedSourceSlugs(row) {
+  const strongest = splitList(row.strongest_sources);
+  const all = getAllSourceSlugs(row);
+  return [...strongest.filter(slug => all.includes(slug)), ...all.filter(slug => !strongest.includes(slug))];
+}
+
+function hasCheatingSignal(row) {
+  return splitList(row.flags).some(flag => flag !== 'server_ban' && flag !== 'clear');
 }
 
 function priorityIndicators(slugs, primarySlug) {
@@ -85,7 +110,7 @@ function priorityIndicators(slugs, primarySlug) {
 }
 
 function sourceCell(row) {
-  const slugs = getAllSourceSlugs(row);
+  const slugs = orderedSourceSlugs(row);
   if (!slugs.length) return '<span class="muted">No source</span>';
 
   const primarySlug = row.primary_source || slugs[0];
@@ -100,17 +125,14 @@ function sourceCell(row) {
 }
 
 function sourceDetails(row) {
-  const slugs = getAllSourceSlugs(row);
+  const slugs = orderedSourceSlugs(row);
   if (!slugs.length) return '';
-  const primary = row.primary_source;
-  const ordered = primary && slugs.includes(primary)
-    ? [primary, ...slugs.filter(slug => slug !== primary)]
-    : slugs;
-  const items = ordered.map(slug => {
+  const items = slugs.map(slug => {
     const source = sources.get(slug);
-    return `<li><span class="source-badge">${esc(sourceBadge(source))}</span>${sourceAnchor(source, slug)}</li>`;
+    const note = isScoring(source) ? '' : '<span class="muted no-weight">no confidence weight</span>';
+    return `<li><span class="source-badge">${esc(sourceBadge(source))}</span>${sourceAnchor(source, slug, true)}${note}</li>`;
   }).join('');
-  const flags = String(row.flags || '').split(';').filter(Boolean).map(flag => `<span class="flag-chip">${esc(flag)}</span>`).join('');
+  const flags = splitList(row.flags).map(flag => `<span class="flag-chip">${esc(FLAG_LABELS[flag] || flag)}</span>`).join('');
   return `<tr class="detail-row">
     <td colspan="5">
       <div class="detail-panel">
@@ -126,6 +148,14 @@ function sourceDetails(row) {
       </div>
     </td>
   </tr>`;
+}
+
+function confidenceCell(row) {
+  if (!hasCheatingSignal(row)) {
+    return '<span class="confidence confidence-none" title="This account is listed only by records that do not assert cheating">'
+      + '<strong>—</strong><span>No cheating signal</span></span>';
+  }
+  return `<span class="confidence confidence-${esc(row.confidence_tier)}"><strong>${esc(row.confidence_score)}</strong><span>${esc(tierLabel(row.confidence_tier))}</span></span>`;
 }
 
 function avatarUrl(row) {
@@ -145,7 +175,7 @@ function accountRow(row) {
       </div>
     </td>
     <td><span class="steamid mono">${esc(row.steamid64)}</span></td>
-    <td><span class="confidence confidence-${esc(row.confidence_tier)}"><strong>${esc(row.confidence_score)}</strong><span>${esc(tierLabel(row.confidence_tier))}</span></span></td>
+    <td>${confidenceCell(row)}</td>
     <td><div class="profile-links"><a href="${esc(profileUrl)}" target="_blank" rel="noreferrer">Profile</a><a href="${esc(historyUrl)}" target="_blank" rel="noreferrer">History</a></div></td>
     <td>${sourceCell(row)}</td>
   </tr>`;
@@ -164,7 +194,7 @@ function pagerHtml() {
   return `<button type="button" data-page="prev"${previousDisabled}>Previous</button><span>Page ${page.toLocaleString()} of ${pages.toLocaleString()}</span><button type="button" data-page="next"${nextDisabled}>Next</button>`;
 }
 
-function renderPage() {
+function renderPage(focusExpandFor) {
   const pages = pageCount();
   if (page > pages) page = pages;
   const start = (page - 1) * PAGE_SIZE;
@@ -187,6 +217,13 @@ function renderPage() {
       img.src = 'avatar-placeholder.svg';
     }, { once: true });
   });
+
+  // The table is re-rendered as HTML, so the button that was activated has to
+  // be focused again or keyboard users are dropped back to the top of the page.
+  if (focusExpandFor) {
+    const button = rows.querySelector(`[data-expand="${CSS.escape(focusExpandFor)}"]`);
+    if (button) button.focus();
+  }
 }
 
 function applyFilters() {
@@ -216,8 +253,9 @@ function scheduleSearch() {
 function handleClick(event) {
   const expand = event.target.closest('[data-expand]');
   if (expand) {
-    expandedSteamId = expandedSteamId === expand.dataset.expand ? '' : expand.dataset.expand;
-    renderPage();
+    const target = expand.dataset.expand;
+    expandedSteamId = expandedSteamId === target ? '' : target;
+    renderPage(target);
     return;
   }
   const pageButton = event.target.closest('[data-page]');
@@ -229,18 +267,9 @@ function handleClick(event) {
   document.querySelector('.table-wrap').scrollIntoView({ block: 'start' });
 }
 
-function updateStickyOffset() {
-  const tools = document.querySelector('.sticky-tools');
-  if (!tools) return;
-  document.documentElement.style.setProperty('--sticky-tools-height', `${Math.ceil(tools.getBoundingClientRect().height)}px`);
-}
-
 q.addEventListener('input', scheduleSearch);
 tier.addEventListener('change', applyFilters);
 document.addEventListener('click', handleClick);
-window.addEventListener('resize', updateStickyOffset, { passive: true });
-if ('ResizeObserver' in window) new ResizeObserver(updateStickyOffset).observe(document.querySelector('.sticky-tools'));
-updateStickyOffset();
 
 Promise.all([
   fetch('data/accounts.json').then(response => {

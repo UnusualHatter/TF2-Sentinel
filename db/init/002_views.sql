@@ -32,12 +32,15 @@ SELECT
 FROM v_account_summary s
 LEFT JOIN v_latest_alias la USING (steamid64);
 
+-- Public ban lists identify the community, not which of its servers issued the
+-- ban, so bans carry a source and only join a server row when one is known.
 CREATE VIEW v_south_america_bans AS
 SELECT
-    b.*, srv.name AS server_name, srv.region, srv.country_code
+    b.*, s.name AS source_name, srv.name AS server_name, srv.country_code
 FROM bans b
-JOIN servers srv USING (server_id)
-WHERE lower(srv.region) IN ('south america','south-america','sa','latam');
+JOIN sources s USING (source_id)
+LEFT JOIN servers srv USING (server_id)
+WHERE lower(s.scope_region) IN ('south america','south-america','sa','latam');
 
 CREATE VIEW v_latest_review AS
 SELECT DISTINCT ON (steamid64)

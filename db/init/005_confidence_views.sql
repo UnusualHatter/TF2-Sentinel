@@ -13,6 +13,10 @@ SELECT
             WHEN 'suspicious' THEN 0.45
             WHEN 'association' THEN 0.10
             WHEN 'cheater_supporter' THEN 0.10
+            -- Imported for provenance only: a conduct/alt-account ban or a
+            -- source stating the account is clear must not raise confidence.
+            WHEN 'server_ban' THEN 0.00
+            WHEN 'clear' THEN 0.00
             ELSE 0.20
         END
     ) AS contribution

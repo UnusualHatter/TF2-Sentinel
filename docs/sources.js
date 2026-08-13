@@ -22,8 +22,3 @@ function render() {
 q.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(render,120);});
 fetch('data/sources.json').then(r=>r.json()).then(sourceData=>{data=sourceData.map(row=>({...row,_search:[row.name,row.slug,row.source_type,row.scope_region,row.assessment_method,row.independence_group].join(' ').toLowerCase()}));render();});
 fetch('data/meta.json',{cache:'no-store'}).then(r=>r.json()).then(meta=>{if(meta.last_database_update_display)lastUpdate.textContent=`Last database update: ${meta.last_database_update_display}`;}).catch(()=>{});
-
-function updateStickyOffset(){const tools=document.querySelector('.sticky-tools');if(!tools)return;document.documentElement.style.setProperty('--sticky-tools-height',`${Math.ceil(tools.getBoundingClientRect().height)}px`);}
-window.addEventListener('resize',updateStickyOffset,{passive:true});
-if('ResizeObserver' in window)new ResizeObserver(updateStickyOffset).observe(document.querySelector('.sticky-tools'));
-updateStickyOffset();

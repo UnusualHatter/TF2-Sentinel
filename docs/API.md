@@ -22,13 +22,15 @@ Important fields:
 
 The source catalog plus scoring metadata. Source slugs are stable integration keys. Fields include upstream URL, source type, region, base weight, independence group, whether the source counts toward confidence, mirror state and assessment method.
 
+`short_name` is the compact label used in the account table; `name` is the full catalog label.
+
 ## `data/servers.json`
 
 Reference catalog for the South American servers tracked by this snapshot. A server entry is not a moderation assertion. `public_moderation_url` is only present where a public ban system was located.
 
 ## `data/meta.json`
 
-Snapshot metadata used by the site, including the database update date, generation timestamp, account count and source count.
+Snapshot metadata used by the site: `last_database_update`, `last_database_update_display`, `generated_at`, `timezone`, `unique_accounts`, `source_records`, `registered_sources`, `data_bearing_sources` and `servers_tracked`.
 
 ## Stability
 
