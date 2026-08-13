@@ -31,33 +31,7 @@ Independent contributions are combined with diminishing returns. Tiers are `very
 
 Use `data/normalized/confidence.csv` or PostgreSQL view `v_account_confidence`.
 
-## GitHub / GitHub Pages
-
-The repository includes a dependency-free static viewer in `docs/`.
-
-GitHub Pages setup:
-
-1. Push the repository to GitHub.
-2. Open repository **Settings → Pages**.
-3. Choose **Deploy from a branch**.
-4. Select the default branch and `/docs`.
-
-Machine-readable public exports:
-
-- `data/public/accounts.json`
-- `data/public/accounts.csv`
-- `data/public/sources.json`
-- `data/public/meta.json`
-- `docs/data/accounts.json`
-- `docs/data/sources.json`
-- `docs/data/meta.json`
-- `docs/API.md` (field contract for consumers)
-
-These files can be consumed directly through GitHub raw URLs or GitHub Pages.
-
-The Pages viewer displays SteamID64, confidence level, Steam profile link, source provenance, and SteamHistory lookup. Steam avatars and current persona names are populated by `scripts/enrich_steam_profiles.py`. For the included GitHub Actions refresh workflow, add a repository secret named `STEAM_WEB_API_KEY`.
-
-## PostgreSQL
+## PostgreSQL 
 
 ```bash
 cp .env.example .env
