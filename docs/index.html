@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Searchable TF2 moderation-signal database with source provenance and confidence scoring.">
+<title>Holiday CheaterDB</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<header>
+<div class="header-row">
+<div>
+<h1>Holiday CheaterDB</h1>
+<p>TF2 moderation signals with source provenance and confidence scoring.</p>
+</div>
+<div class="db-update" id="last-update">Last database update: August 12, 2026</div>
+</div>
+</header>
+<section class="controls">
+<input id="q" type="search" placeholder="SteamID64, Steam3, name or source" autocomplete="off">
+<select id="tier">
+<option value="">All confidence tiers</option>
+<option value="very_high">Very high</option>
+<option value="high">High</option>
+<option value="medium">Medium</option>
+<option value="low">Low</option>
+<option value="very_low">Very low</option>
+<option value="unscored">Unscored</option>
+</select>
+</section>
+<div id="stats" class="stats"></div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Player</th>
+<th>SteamID64</th>
+<th>Confidence</th>
+<th>Steam</th>
+<th>Source</th>
+<th>Signals</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody id="rows"></tbody>
+</table>
+</div>
+<footer>
+<a href="data/accounts.json">accounts.json</a>
+<span>·</span>
+<a href="sources.html">sources</a>
+<span>·</span>
+<a href="data/sources.json">sources.json</a>
+<span>·</span>
+<a href="data/meta.json">meta.json</a>
+</footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

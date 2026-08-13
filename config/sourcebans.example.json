@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "name": "Serv dos Brother",
+      "url": "https://bans.svdosbrothers.com",
+      "region": "South America",
+      "country_code": "BR"
+    },
+    {
+      "name": "UGC Gaming",
+      "url": "https://sb.ugc-gaming.net",
+      "region": "global",
+      "country_code": null
+    }
+  ]
+}

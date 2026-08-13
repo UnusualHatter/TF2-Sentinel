@@ -1,0 +1,71 @@
+source_id,base_weight,evidence_class,independence_group,counts_toward_confidence,is_mirror,assessment_method,last_verified,notes
+1,10,very_weak,cheaterlist-association,true,false,association,,
+2,5,very_weak,cheaterlist-association,true,false,association,,
+3,20,weak,cheaterlist-association,true,false,vac-plus-association,,
+4,92,strong,pazer-official,true,false,curated,,
+5,60,moderate,qfoxb,true,false,community-list,,
+6,72,moderate,megacheaterdb,true,false,curated-database,,
+7,8,very_weak,nullcore-membership,true,false,group-membership,,
+8,92,strong,rgl,true,false,league-conviction,,
+9,55,moderate,sleepy-bots,true,false,bot-list,,
+10,72,moderate,sleepy-bots,true,false,bot-list,,
+11,75,moderate,sleepy-bots,true,false,derived-merged-bot-list,,
+12,68,moderate,sleepy-bots,true,false,bot-list,,
+13,68,moderate,sleepy-bots,true,false,bot-list,,
+14,60,moderate,sleepy-bots,true,false,bot-list,,
+15,60,moderate,sleepy-bots,true,false,bot-list,,
+16,40,weak,sleepy-bots,true,false,mixed-group-list,,
+17,60,moderate,sleepy-bots,true,false,bot-list,,
+18,60,moderate,sleepy-bots,true,false,bot-list,,
+19,60,moderate,sleepy-bots,true,false,bot-list,,
+20,65,moderate,sleepy-bots,true,false,bot-list,,
+21,65,moderate,sleepy-bots,true,false,bot-list,,
+22,60,moderate,sleepy-bots,true,false,bot-list,,
+23,65,moderate,sleepy-bots,true,false,bot-list,,
+24,35,weak,sleepy-main,true,false,external-association,,
+25,20,weak,sleepy-main,true,false,misc,,
+26,25,weak,sleepy-main,true,false,no-proof,,
+27,75,moderate,sleepy-main,true,false,curated-player-list,,
+28,88,strong,rentamedic-curated,true,false,curated-database,2026-08-12,
+29,0,none,rentamedic-aggregator,false,true,aggregator,2026-08-12,
+30,80,strong,skial,true,false,community-cheat-ban,2026-08-12,
+31,92,strong,blackwonder,true,false,anti-cheat-detection,2026-08-12,
+32,90,strong,ugc,true,false,league-conviction,2026-08-12,
+33,0,none,ugc-mirror,false,true,mirror-index,2026-08-12,
+34,80,strong,phoenixgaming,true,false,community-cheat-ban,2026-08-12,
+35,80,strong,discff,true,false,community-cheat-ban,2026-08-12,
+36,90,strong,panda,true,false,anti-cheat-or-reviewed-ban,2026-08-12,
+37,80,strong,jumpacademy,true,false,community-cheat-ban,2026-08-12,
+38,80,strong,thg,true,false,community-cheat-ban,2026-08-12,
+39,92,strong,loos,true,false,anti-cheat-detection,2026-08-12,
+40,80,strong,gfl,true,false,community-cheat-ban,2026-08-12,
+41,92,strong,castaway,true,false,anti-cheat-detection,2026-08-12,
+42,85,strong,serv-dos-brother,true,false,community-cheat-ban,2026-08-12,
+43,82,strong,vovo-fortress,true,false,community-cheat-ban,2026-08-12,
+44,80,strong,eotl,true,false,community-cheat-ban,2026-08-12,
+45,92,strong,etf2l,true,false,league-conviction,2026-08-12,
+46,92,strong,rgl,true,false,league-conviction,2026-08-12,
+47,92,strong,ozfortress,true,false,league-conviction,2026-08-12,
+48,90,strong,brasil-fortress,true,false,league-conviction,2026-08-12,
+49,25,weak,metalstats,true,false,community-reputation,2026-08-12,
+50,12,very_weak,tacobot,true,false,community-report,2026-08-12,
+51,60,moderate,wgetjane,true,false,historical-bot-list,2026-08-12,
+52,50,moderate,milenko-cathook,true,false,self-advertised-cheat-client,2026-08-12,
+53,45,weak,valve-game-ban,true,false,generic-tf2-game-ban,2026-08-12,
+54,30,weak,valve-vac,true,false,generic-vac-ban,2026-08-12,
+55,35,weak,steam-public-list,true,false,historical-community-list,2026-08-12,
+56,75,moderate,tf2bd-trusted,true,false,trusted-community-list,2026-08-12,
+57,90,strong,mtrn,true,false,anti-cheat-detection,2026-08-12,Ignore unbanned/reversed false-positive records.
+58,18,very_weak,mvmlobby,true,false,community-reputation,2026-08-12,Only explicit cheat/support/exploit reports; comments may conflict or be outdated.
+59,0,aggregator,reptf,false,true,provenance-aggregator,2026-08-12,Do not double count underlying community bans.
+60,75,moderate,horizon-australia,true,false,curated-playerlist,2026-08-12,Preserve cheater vs suspicious distinction from source.
+61,92,strong,nocrex-tom,true,false,reviewer-confirmed-report,2026-08-12,Treat as a source assertion backed by the project review process; preserve provenance and appeal/reversal state when available.
+62,85,strong,bots-tf,true,false,compiled-bot-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+63,85,strong,d3fc0n6-direct,true,false,compiled-cheater-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+64,12,very_weak,tacobot,true,false,compiled-community-report-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+65,92,strong,pazer-official,true,false,compiled-curated-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+66,72,moderate,megacheaterdb,true,false,compiled-curated-database,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+67,72,moderate,megacheaterdb,true,false,compiled-suspicious-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+68,72,moderate,megacheaterdb,true,false,compiled-watch-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+69,0,none,megacheaterdb,false,false,compiled-legit-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+70,0,none,steamhistory,false,false,identity-history-enrichment,2026-08-12,Identity/history enrichment only. Historical profile data must not be interpreted as cheating evidence.

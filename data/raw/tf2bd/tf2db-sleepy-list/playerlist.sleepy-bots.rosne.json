@@ -1,0 +1,777 @@
+{
+	"$schema": "https://raw.githubusercontent.com/PazerOP/tf2_bot_detector/master/schemas/v3/playerlist.schema.json",
+	"file_info": {
+		"authors": [
+			"surepy"
+		],
+		"description": "rosne or whatever that guy name is",
+		"title": "sleepylist-bots.rosne"
+	},
+	"players": [
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "stormsurfer12",
+				"time": 1717116508
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"FIXING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1180985500]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "az1ge",
+				"time": 1702190987
+			},
+			"proof": [
+				"rosne (rule broke)"
+			],
+			"steamid": "[U:1:1383476370]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "youtube.com/@RosneGaming",
+				"time": 1700392485
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1581768912]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "(1)youtube.com/@RosneGaming",
+				"time": 1699791234
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1581783621]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "(1)youtube.com/@RosneGaming",
+				"time": 1700656929
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1581904013]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "youtube.com/@RosneGaming",
+				"time": 1700697139
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1582150611]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 3",
+				"time": 1714646049
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1582159557]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 11",
+				"time": 1714644774
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1582195408]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "youtube.com/@RosneGaming",
+				"time": 1702191030
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1582350011]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 12",
+				"time": 1714644774
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1582368425]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "youtube.com/@RosneGaming",
+				"time": 1699791234
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: rosne",
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1582454975]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 7",
+				"time": 1714644774
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1583502072]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "(2)youtube.com/@RosneGaming",
+				"time": 1699791210
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: rosne",
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1583959738]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 10",
+				"time": 1714644661
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1584122039]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 8",
+				"time": 1714646029
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1584377142]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 20",
+				"time": 1714644774
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1586243657]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 25",
+				"time": 1714644774
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1586694598]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 19",
+				"time": 1714646137
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1589084906]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 30",
+				"time": 1714644774
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1589331302]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Jaredmice",
+				"time": 1717115019
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"discord.gg/rosnehook <-- IMMUNITY, BOT RENTALS, & MORE!\"",
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"FIXING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1596561736]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "space toast",
+				"time": 1717114840
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"FIXING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1665530499]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "discord.gg/rosnehook 17",
+				"time": 1714644662
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: Rosne (general)"
+			],
+			"steamid": "[U:1:1676861068]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mech\u0304in\u1ea1tor",
+				"time": 1716057619
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"Join to get Immunity discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"IMMUNITY --> discord.gg/rosnehook <-- IMMUNITY\"",
+				"[auto] automatically marked: Cheater | reason: \"IMMUNITY --> discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1682046084]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Me\u0e4achinator | #FixTF2",
+				"time": 1717111055
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"#FIXTF2 --> discord.gg/rosnehook <-- IMMUNITY\"",
+				"[auto] automatically marked: Cheater | reason: \"Can we #FIXTF2? Join discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"#Fixtf2 party at discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1682218950]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechin\u0101tor",
+				"time": 1716059025
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"Immunity at discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"Want Immunity? Join discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"Join to get Immunity discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"IMMUNITY --> discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"JOIN NOW TO GET IMMUNITY --> discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1682636797]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "24ry3",
+				"time": 1715944072
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"discord.gg/rosnehook <-- IMMUNITY, BOT RENTALS, & MORE!\""
+			],
+			"steamid": "[U:1:1685894493]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "jorlowski2",
+				"time": 1715943951
+			},
+			"proof": [
+				"bot (rosne)",
+				"[auto] automatically marked: Cheater | reason: \"discord.gg/rosnehook <-- IMMUNITY, BOT RENTALS, & MORE!\""
+			],
+			"steamid": "[U:1:1686903314]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "youriichi.pixel",
+				"time": 1717114995
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"FIXING TF2 AT discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1687547791]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "moxxie28",
+				"time": 1715942569
+			},
+			"proof": [
+				"bot",
+				"[auto] automatically marked: Cheater | reason: \"discord.gg/rosnehook <-- IMMUNITY, BOT RENTALS, & MORE!\""
+			],
+			"steamid": "[U:1:1687576076]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "smittywerbenjaegermanjensen",
+				"time": 1717116601
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1687648557]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "[VAC] PinkieWa\u0e4asHere\u0e4a",
+				"time": 1717115109
+			},
+			"proof": [
+				"[auto] automatically marked: Suspicious | reason: a good 98% of people with this tag are cheating, verify and unmark otherwise.",
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)"
+			],
+			"steamid": "[U:1:1690500051]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mec\u1e25ina\u1e6dor",
+				"time": 1714648384
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1691922568]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechina\u0e3a\u0e4ato\u0e3ar | #FixTF2",
+				"time": 1717111011
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1692442356]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechina\u0e3ator | #FixTF2",
+				"time": 1717114377
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1692673641]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechina\u1e6d\u0304or",
+				"time": 1716055857
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1692810227]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "M\u0e4ae\u0e4achinator | #FixTF2",
+				"time": 1717118906
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"#Fixtf2 party at discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"JOIN NOW TO FIX TF2 --> discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1692923775]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mech\u0e3ainator | #Fix\u0e4aTF2\u0e4a",
+				"time": 1717116943
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"Join to get Immunity discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"#Fixtf2 party at discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1692926216]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechinator",
+				"time": 1716058962
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"Want Immunity? Join discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"IMMUNITY --> discord.gg/rosnehook <-- IMMUNITY\"",
+				"[auto] automatically marked: Cheater | reason: \"JOIN NOW TO GET IMMUNITY --> discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"Immunity at discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1693092657]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "M\u00ebchinator",
+				"time": 1715942311
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1693112286]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechin\u0e4aato\u0e3ar | \u0e4a#FixTF2",
+				"time": 1717118378
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"IMMUNITY --> discord.gg/rosnehook <-- #FIXTF2\"",
+				"[auto] automatically marked: Cheater | reason: \"#Fixtf2 party at discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"Join to get Immunity discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1693169043]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "\u0e4aMec\u0e4ahinato\u0e4ar | #FixTF2",
+				"time": 1717114226
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1693211464]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "M\u0e3ae\u0e3ac\u0e3ahinator | #FixTF2",
+				"time": 1717114257
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator",
+				"[auto] automatically marked: Cheater | reason: \"Want Immunity? Join discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"IMMUNITY --> discord.gg/rosnehook <-- IMMUNITY\"",
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: \"#FIXTF2 --> discord.gg/rosnehook <-- IMMUNITY\"",
+				"[auto] automatically marked: Cheater | reason: \"Can we #FIXTF2? Join discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"Join to get Immunity discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1694611483]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechinator | #FixTF\u0e4a2",
+				"time": 1717110993
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1695637758]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechinator | #Fix\u0e4aTF2",
+				"time": 1717111081
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1696039545]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mech\u0e3ainator | #FixTF2",
+				"time": 1717116850
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)",
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1696467583]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "M\u00eachina\u1e6d\u00f2r",
+				"time": 1716055689
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1697502891]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "M\u00ebchinato\u0159",
+				"time": 1716058404
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1700734589]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "M\u0119chi\u00f1a\u0163o\u0159",
+				"time": 1716055472
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: mechinator"
+			],
+			"steamid": "[U:1:1703821449]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "PandaUltraSolo",
+				"time": 1717116587
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"FIXING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1710209656]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Pee Sells... but Who's Buying?",
+				"time": 1717116587
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"FIXING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1714893234]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Mechinator \u0e3a| #\u0e3aFix\u0e3aTF2",
+				"time": 1717117525
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: bad characters (REALLY LAZY, VERIFY ALWAYS)"
+			],
+			"steamid": "[U:1:1719273414]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "CaptainT0ast",
+				"time": 1717116584
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\"",
+				"[auto] automatically marked: Cheater | reason: \"FIXING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1719657647]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "HypeR",
+				"time": 1716057385
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"discord.gg/rosnehook <-- IMMUNITY, BOT RENTALS, & MORE!\""
+			],
+			"steamid": "[U:1:1719973027]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "ferp",
+				"time": 1716057356
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"discord.gg/rosnehook <-- IMMUNITY, BOT RENTALS, & MORE!\""
+			],
+			"steamid": "[U:1:1728519769]"
+		},
+		{
+			"attributes": [
+				"cheater"
+			],
+			"last_seen": {
+				"player_name": "Supply and Command",
+				"time": 1717116508
+			},
+			"proof": [
+				"[auto] automatically marked: Cheater | reason: \"SAVING TF2 AT discord.gg/rosnehook\""
+			],
+			"steamid": "[U:1:1729006433]"
+		}
+	]
+}

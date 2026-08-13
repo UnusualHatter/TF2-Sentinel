@@ -1,0 +1,17 @@
+{
+  "unique_accounts": 19239,
+  "source_records": 29436,
+  "flags": 29530,
+  "evidence_rows": 11489,
+  "registered_sources": 70,
+  "data_bearing_seed_sources": 36,
+  "confidence_tiers": {
+    "very_high": 1402,
+    "high": 10327,
+    "medium": 3402,
+    "low": 112,
+    "very_low": 3918,
+    "unscored": 78
+  },
+  "generated_at": "2026-08-12T21:48:05-03:00"
+}
