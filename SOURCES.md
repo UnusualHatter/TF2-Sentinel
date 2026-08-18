@@ -39,33 +39,33 @@ A source with **Counts = no** is retained for reference, identity history, mirro
 | 31 | BlackWonder — SourceBans | sourcebans | global | 2 | 92 | yes | [upstream](https://bans.blackwonder.tf/index.php?p=banlist) |
 | 32 | UGC — direct cheating bans | league bans | global | 0 | 90 | yes | [upstream](https://www.ugcleague.com/banlist_tf2.cfm) |
 | 33 | UGC — mirrored bans | mirror index | global | 0 | 0 | no | [upstream](https://www.ugcleague.com/banlist_tf2.cfm) |
-| 34 | Phoenix Gaming — community bans | community bans | global | 0 | 80 | yes | [upstream](https://rentamedic.org/cheaters/api) |
+| 34 | Phoenix Gaming — community bans | community bans | global | 897 | 80 | yes | [upstream](https://bans.phoenix-gaming.gg/index.php?p=banlist) |
 | 35 | Disc-FF — community bans | community bans | global | 0 | 80 | yes | [upstream](https://rentamedic.org/cheaters/api) |
-| 36 | Panda Community — SourceBans | sourcebans | global | 0 | 90 | yes | [upstream](https://bans.panda-community.com/index.php?p=banlist) |
-| 37 | Jump Academy — SourceBans | sourcebans | global | 0 | 80 | yes | [upstream](https://bans.jumpacademy.tf/index.php?p=banlist) |
+| 36 | Panda Community — SourceBans | sourcebans | global | 744 | 90 | yes | [upstream](https://bans.panda-community.com/index.php?p=banlist) |
+| 37 | Jump Academy — SourceBans | sourcebans | global | 900 | 80 | yes | [upstream](https://bans.jumpacademy.tf/index.php?p=banlist) |
 | 38 | THG — community bans | community bans | global | 0 | 80 | yes | [upstream](https://rentamedic.org/cheaters/api) |
-| 39 | LOOS Community — SourceBans | sourcebans | global | 0 | 92 | yes | [upstream](https://sb.looscommunity.com/?p=banlist) |
+| 39 | LOOS Community — SourceBans | sourcebans | global | 898 | 92 | yes | [upstream](https://sb.looscommunity.com/?p=banlist) |
 | 40 | GFL — community bans | community bans | global | 0 | 80 | yes | [upstream](https://rentamedic.org/cheaters/api) |
-| 41 | Castaway.tf — SourceBans | sourcebans | global | 0 | 92 | yes | [upstream](https://castaway.tf/bans/index.php?p=banlist) |
+| 41 | Castaway.tf — SourceBans | sourcebans | global | 575 | 92 | yes | [upstream](https://castaway.tf/bans/index.php?p=banlist) |
 | 42 | Serv dos Brother — SourceBans | sourcebans | south-america | 2,459 | 85 | yes | [upstream](https://bans.svdosbrothers.com/index.php?p=banlist) |
 | 43 | Vovô Fortress — bans | community bans | south-america | 0 | 82 | yes | [upstream](https://vovo.tf/) |
-| 44 | End of the Line — SourceBans | sourcebans | global | 0 | 80 | yes | [upstream](https://tf2.endofthelinegaming.com/sourcebans/) |
+| 44 | End of the Line — SourceBans | sourcebans | global | 431 | 80 | yes | [upstream](https://tf2.endofthelinegaming.com/sourcebans/) |
 | 45 | ETF2L — cheating bans | league bans | europe | 0 | 92 | yes | [upstream](https://etf2l.org/etf2l/bans/) |
 | 46 | RGL — cheating bans | league bans | north-america | 0 | 92 | yes | [upstream](https://rgl.gg/) |
 | 47 | ozfortress — unfair-play bans | league bans | oceania | 0 | 92 | yes | [upstream](https://docs.ozfortress.com/info/anticheat_bans/) |
 | 48 | Brasil Fortress — discipline | league bans | south-america | 0 | 90 | yes | [upstream](https://bf.sonikro.com/) |
 | 49 | MetalStats.tf — MvM reputation | mvm reputation | global | 0 | 25 | yes | [upstream](https://metalstats.tf/) |
 | 50 | Tacobot — MvM reports | mvm reputation | global | 0 | 12 | yes | [upstream](https://tacobot.tf/) |
-| 51 | wgetJane — bot list | public playerlist | global | 0 | 60 | yes | [upstream](https://gist.github.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9) |
+| 51 | wgetJane — bot list | public playerlist | global | 3,025 | 60 | yes | [upstream](https://gist.github.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9) |
 | 52 | Milenko — Cathook broadcast list | public playerlist | global | 0 | 50 | yes | [upstream](https://github.com/PazerOP/tf2_bot_detector/wiki/Customization) |
 | 53 | Valve — TF2 game-ban signal | platform ban | global | 0 | 45 | yes | [upstream](https://wiki.teamfortress.com/wiki/Game_ban) |
 | 54 | Valve — VAC signal | platform ban | global | 0 | 30 | yes | [upstream](https://partner.steamgames.com/doc/webapi/isteamuser) |
 | 55 | PLTF2C — community list | community list | global | 0 | 35 | yes | [upstream](https://steamcommunity.com/groups/PLTF2C/discussions/0/535151589910142184/) |
 | 56 | TF2BD — Trusted list | tf2bd playerlist | global | 0 | 75 | yes | [upstream](https://github.com/PazerOP/tf2_bot_detector) |
-| 57 | MTRN.hu — SourceBans | sourcebans | global | 0 | 90 | yes | [upstream](https://mtrn.hu/sourcebans/index.php?p=banlist) |
+| 57 | MTRN.hu — SourceBans | sourcebans | global | 313 | 90 | yes | [upstream](https://mtrn.hu/sourcebans/index.php?p=banlist) |
 | 58 | MvM Lobby — reputation | mvm reputation | global | 0 | 18 | yes | [upstream](https://mvmlobby.tf/) |
 | 59 | Rep.TF — reputation index | aggregator | global | 0 | 0 | no | [upstream](https://rep.tf/) |
-| 60 | Horizon — Australia TF2 Cheaters | tf2bd playerlist | oceania | 0 | 75 | yes | [upstream](https://github.com/HorizonAUSanticheat/Australia-TF2-Cheaters) |
+| 60 | Horizon — Australia TF2 Cheaters | tf2bd playerlist | oceania | 296 | 75 | yes | [upstream](https://github.com/HorizonAUSanticheat/Australia-TF2-Cheaters) |
 | 61 | Tom — Vorobey review database | reviewed report database | global | 4,217 | 92 | yes | [upstream](https://github.com/Nocrex/Tom) |
 | 62 | bots.tf — bot list | compiled playerlist | global | 2,729 | 85 | yes | [upstream](https://bots.tf/) |
 | 63 | CheaterList — friend association (compiled copy) | compiled playerlist | global | 1,387 | 10 | yes | [upstream](https://github.com/d3fc0n6/CheaterList) |
@@ -76,8 +76,8 @@ A source with **Counts = no** is retained for reference, identity history, mirro
 | 68 | MCDB — watched | compiled playerlist | global | 1,033 | 72 | yes | [upstream](https://mcdb.neocities.org/) |
 | 69 | MCDB — legit | compiled playerlist | global | 80 | 0 | no | [upstream](https://mcdb.neocities.org/) |
 | 70 | SteamHistory — profile history | profile history enrichment | global | 0 | 0 | no | [upstream](https://steamhistory.net/) |
-| 71 | minein4 — Shitlist | tf2bd playerlist | europe | 0 | 65 | yes | [upstream](https://github.com/minein4/Shitlist) |
-| 72 | Garou3299 — TF2BD database | tf2bd playerlist | global | 0 | 70 | yes | [upstream](https://github.com/Garou3299/TF2BD-Database) |
+| 71 | minein4 — Shitlist | tf2bd playerlist | europe | 1,920 | 65 | yes | [upstream](https://github.com/minein4/Shitlist) |
+| 72 | Garou3299 — TF2BD database | tf2bd playerlist | global | 229 | 70 | yes | [upstream](https://github.com/Garou3299/TF2BD-Database) |
 | 73 | STAR Cheater Database | mirror index | global | 0 | 0 | no | [upstream](https://github.com/starshipsystems/tf2-cheater-list) |
 | 74 | ill5 — MegaScatterBomb database mirror | mirror index | global | 0 | 0 | no | [upstream](https://github.com/ill5-com/megascatterbomb-tf2-cheater-database) |
 | 75 | Nemesis — TF2BD player list | aggregator | global | 0 | 0 | no | [upstream](https://nemesis.surf/) |
@@ -85,6 +85,18 @@ A source with **Counts = no** is retained for reference, identity history, mirro
 | 77 | ZM Brasil — SourceBans | sourcebans | south-america | 793 | 90 | yes | [upstream](https://zmbr.mjsv.us/index.php?p=banlist) |
 | 78 | Electric Servers — SourceBans | sourcebans | south-america | 0 | 90 | yes | [upstream](https://electricservers.com.ar/bans/) |
 | 79 | Oppressive Territory — SourceBans | sourcebans | south-america | 109 | 85 | yes | [upstream](https://ban.optr.me/index.php?p=banlist) |
+| 80 | TF2BD-ASEAN-LIST — player list | tf2bd playerlist | asia | 596 | 70 | yes | [upstream](https://github.com/Critical-Cookie/TF2BD-ASEAN-LIST) |
+| 81 | joekiller — personal cheater list | tf2bd playerlist | north-america | 817 | 72 | yes | [upstream](https://github.com/joekiller/joekiller-list) |
+| 82 | Vonny — personal cheater list | tf2bd playerlist | global | 15 | 50 | yes | [upstream](https://github.com/zyzel-del/blacklist_cheaters_tf2_bot_detector) |
+| 83 | RednotePL — TF2 bot list | tf2bd playerlist | europe | 77 | 45 | yes | [upstream](https://github.com/RednotePL/tf2-botlist) |
+| 84 | Cleffy — personal cheater list | tf2bd playerlist | europe | 1,096 | 72 | yes | [upstream](https://github.com/Cl3ffy/cleffy-list) |
+| 85 | As0mn — NA casual cheater list | tf2bd playerlist | north-america | 449 | 65 | yes | [upstream](https://github.com/As0mn/tf2bd-list) |
+| 86 | H0xton1337 — Naughty list | tf2bd playerlist | global | 762 | 60 | yes | [upstream](https://github.com/H0xton1337/naughtylist-) |
+| 87 | DarkPyro's Servers — SourceBans | sourcebans | global | 184 | 85 | yes | [upstream](https://bans.darkpyro.gg/) |
+| 88 | Flux.TF — SourceBans | sourcebans | global | 896 | 85 | yes | [upstream](https://bans.flux.tf/) |
+| 89 | Scrap.TF — SourceBans | sourcebans | global | 900 | 82 | yes | [upstream](https://bans.scrap.tf/) |
+| 90 | Titan.TF — SourceBans | sourcebans | global | 170 | 80 | yes | [upstream](https://bans.titan.tf/) |
+| 91 | FirePowered — SourceBans | sourcebans | north-america | 900 | 82 | yes | [upstream](https://firepoweredgaming.com/) |
 
 ## Notes
 
@@ -94,3 +106,5 @@ A source with **Counts = no** is retained for reference, identity history, mirro
 - South American server entries in `data/reference/south_america_servers.csv` are references. A server listing alone does not flag a player.
 - Public SourceBans records are imported in full for provenance, but only bans whose stated reason is a cheating determination carry confidence weight. Association, alt-account detection, exploit abuse and conduct bans are recorded as `server_ban` and contribute nothing.
 - TF2BD imports ignore unrelated behavior tags unless the record also contains a cheating-relevant classification.
+- Some SourceBans sources reflect a recent-window sync (the most recent banlist pages only) rather than each community's full historical archive; their `last_verified` date marks when that sync was taken.
+

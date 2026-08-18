@@ -3,6 +3,17 @@
 const PAGE_SIZE = 50;
 const SEARCH_DELAY_MS = 140;
 
+// Steam's own profile lookup has no CORS header, so it can't be called directly
+// from a page hosted on a different origin. Routing it through a public CORS
+// proxy lets each visitor's own browser fetch a handful of missing avatars for
+// the accounts on their current page, instead of one server doing all of it
+// (and getting rate-limited by Steam) or requiring an API key.
+const AVATAR_PROXY = 'https://api.allorigins.win/raw?url=';
+const AVATAR_CACHE_KEY = 'sentinel_avatar_cache_v1';
+const AVATAR_CACHE_MAX_ENTRIES = 4000;
+const AVATAR_CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const AVATAR_FETCH_CONCURRENCY = 3;
+
 let accounts = [];
 let sources = new Map();
 let filtered = [];
@@ -163,6 +174,116 @@ function avatarUrl(row) {
   return 'avatar-placeholder.svg';
 }
 
+// --- client-side avatar/name enrichment for accounts the dataset has no Steam
+// profile data for yet. Best-effort only: failures just leave the placeholder.
+let avatarCache = null;
+const avatarAttempted = new Set();
+let avatarFetchesInFlight = 0;
+const avatarQueue = [];
+
+function loadAvatarCache() {
+  if (avatarCache) return avatarCache;
+  try {
+    avatarCache = JSON.parse(window.localStorage.getItem(AVATAR_CACHE_KEY) || '{}');
+  } catch {
+    avatarCache = {};
+  }
+  return avatarCache;
+}
+
+function saveAvatarCache() {
+  const cache = loadAvatarCache();
+  const entries = Object.entries(cache);
+  if (entries.length > AVATAR_CACHE_MAX_ENTRIES) {
+    entries.sort((a, b) => (a[1].ts || 0) - (b[1].ts || 0));
+    for (const [steamid64] of entries.slice(0, entries.length - AVATAR_CACHE_MAX_ENTRIES)) {
+      delete cache[steamid64];
+    }
+  }
+  try {
+    window.localStorage.setItem(AVATAR_CACHE_KEY, JSON.stringify(cache));
+  } catch {
+    // storage full or unavailable; enrichment just won't persist across reloads
+  }
+}
+
+function getCachedAvatar(steamid64) {
+  const entry = loadAvatarCache()[steamid64];
+  if (!entry) return null;
+  if (Date.now() - (entry.ts || 0) > AVATAR_CACHE_TTL_MS) return null;
+  return entry;
+}
+
+async function fetchSteamProfile(steamid64) {
+  const target = `https://steamcommunity.com/profiles/${steamid64}/?xml=1`;
+  const response = await fetch(AVATAR_PROXY + encodeURIComponent(target), { cache: 'no-store' });
+  if (!response.ok) throw new Error(`proxy ${response.status}`);
+  const text = await response.text();
+  if (text.includes('<error>')) return null;
+  const avatarMatch = text.match(/<avatarMedium><!\[CDATA\[(.*?)\]\]><\/avatarMedium>/);
+  const nameMatch = text.match(/<steamID><!\[CDATA\[(.*?)\]\]><\/steamID>/);
+  if (!avatarMatch) return null;
+  return {
+    avatar: avatarMatch[1].replace('akamai.steamstatic.com', 'fastly.steamstatic.com'),
+    name: nameMatch ? nameMatch[1].trim() : '',
+  };
+}
+
+function applyEnrichedProfile(steamid64, data) {
+  const row = bySteamId.get(steamid64);
+  if (row) {
+    row.avatar_url = data.avatar;
+    if (data.name && !row.steam_persona_name) {
+      row.steam_persona_name = data.name;
+      row._search = `${row._search} ${data.name.toLowerCase()}`;
+    }
+  }
+  const img = rows.querySelector(`img[data-steamid64="${CSS.escape(steamid64)}"]`);
+  if (img) img.src = data.avatar;
+  const nameEl = rows.querySelector(`[data-name-for="${CSS.escape(steamid64)}"]`);
+  if (nameEl && data.name && nameEl.textContent === 'Unknown') {
+    nameEl.textContent = data.name;
+    nameEl.title = data.name;
+  }
+}
+
+function pumpAvatarQueue() {
+  while (avatarFetchesInFlight < AVATAR_FETCH_CONCURRENCY && avatarQueue.length) {
+    const steamid64 = avatarQueue.shift();
+    avatarFetchesInFlight += 1;
+    fetchSteamProfile(steamid64)
+      .then(data => {
+        if (data) {
+          loadAvatarCache()[steamid64] = { ...data, ts: Date.now() };
+          saveAvatarCache();
+          applyEnrichedProfile(steamid64, data);
+        }
+      })
+      .catch(() => {
+        // Steam profile is private/deleted, or the CORS proxy is unavailable
+        // right now; leave the placeholder, another visitor may have better luck.
+      })
+      .finally(() => {
+        avatarFetchesInFlight -= 1;
+        pumpAvatarQueue();
+      });
+  }
+}
+
+function enrichVisibleAvatars(visible) {
+  for (const row of visible) {
+    if (row.avatar_url || avatarAttempted.has(row.steamid64)) continue;
+    avatarAttempted.add(row.steamid64);
+    const cached = getCachedAvatar(row.steamid64);
+    if (cached) {
+      applyEnrichedProfile(row.steamid64, cached);
+    } else {
+      avatarQueue.push(row.steamid64);
+    }
+  }
+  pumpAvatarQueue();
+}
+
 function accountRow(row) {
   const profileUrl = row.steam_profile_url || `https://steamcommunity.com/profiles/${row.steamid64}/`;
   const historyUrl = row.steamhistory_url || `https://steamhistory.net/id/${row.steamid64}`;
@@ -170,8 +291,8 @@ function accountRow(row) {
   const main = `<tr class="account-row${expanded ? ' expanded' : ''}">
     <td>
       <div class="player-cell">
-        <img class="avatar" src="${esc(avatarUrl(row))}" alt="" width="40" height="40" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-avatar>
-        <span class="player-name" title="${esc(playerName(row))}">${esc(playerName(row))}</span>
+        <img class="avatar" src="${esc(avatarUrl(row))}" alt="" width="40" height="40" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-avatar data-steamid64="${esc(row.steamid64)}">
+        <span class="player-name" title="${esc(playerName(row))}" data-name-for="${esc(row.steamid64)}">${esc(playerName(row))}</span>
       </div>
     </td>
     <td><span class="steamid mono">${esc(row.steamid64)}</span></td>
@@ -217,6 +338,8 @@ function renderPage(focusExpandFor) {
       img.src = 'avatar-placeholder.svg';
     }, { once: true });
   });
+
+  enrichVisibleAvatars(visible);
 
   // The table is re-rendered as HTML, so the button that was activated has to
   // be focused again or keyboard users are dropped back to the top of the page.
