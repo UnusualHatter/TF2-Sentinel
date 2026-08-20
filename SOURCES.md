@@ -4,6 +4,7 @@ TF2 Sentinel keeps source provenance separate from the final confidence score. T
 
 A source with **Counts = no** is retained for reference, identity history, mirrors, or aggregation and does not independently increase confidence. **Records** is the number of rows bundled in this snapshot; a configured source can legitimately show `0` until its sync command is run.
 
+<!-- sources-table:start -->
 | ID | Source | Type | Region | Records | Weight | Counts | Link |
 |---:|---|---|---:|---:|---:|:---:|---|
 | 1 | CheaterList — friend association | tf2bd playerlist | global | 1,387 | 10 | yes | [upstream](https://github.com/d3fc0n6/CheaterList) |
@@ -40,7 +41,7 @@ A source with **Counts = no** is retained for reference, identity history, mirro
 | 32 | UGC — direct cheating bans | league bans | global | 0 | 90 | yes | [upstream](https://www.ugcleague.com/banlist_tf2.cfm) |
 | 33 | UGC — mirrored bans | mirror index | global | 0 | 0 | no | [upstream](https://www.ugcleague.com/banlist_tf2.cfm) |
 | 34 | Phoenix Gaming — community bans | community bans | global | 897 | 80 | yes | [upstream](https://bans.phoenix-gaming.gg/index.php?p=banlist) |
-| 35 | Disc-FF — community bans | community bans | global | 0 | 80 | yes | [upstream](https://rentamedic.org/cheaters/api) |
+| 35 | Disc-FF — community bans | sourcebans | global | 886 | 82 | yes | [upstream](http://disc-ff.site.nfoservers.com/sourcebanstf2/index.php?p=banlist) |
 | 36 | Panda Community — SourceBans | sourcebans | global | 744 | 90 | yes | [upstream](https://bans.panda-community.com/index.php?p=banlist) |
 | 37 | Jump Academy — SourceBans | sourcebans | global | 900 | 80 | yes | [upstream](https://bans.jumpacademy.tf/index.php?p=banlist) |
 | 38 | THG — community bans | community bans | global | 0 | 80 | yes | [upstream](https://rentamedic.org/cheaters/api) |
@@ -97,6 +98,11 @@ A source with **Counts = no** is retained for reference, identity history, mirro
 | 89 | Scrap.TF — SourceBans | sourcebans | global | 900 | 82 | yes | [upstream](https://bans.scrap.tf/) |
 | 90 | Titan.TF — SourceBans | sourcebans | global | 170 | 80 | yes | [upstream](https://bans.titan.tf/) |
 | 91 | FirePowered — SourceBans | sourcebans | north-america | 900 | 82 | yes | [upstream](https://firepoweredgaming.com/) |
+| 92 | The Furry Pound — SourceBans | sourcebans | global | 890 | 82 | yes | [upstream](https://sourcebans.thefurrypound.org/) |
+| 93 | Otaku Gaming TF — SourceBans | sourcebans | global | 253 | 78 | yes | [upstream](https://bans.otaku.tf/) |
+| 94 | TF2 Casual Fun — SourceBans | sourcebans | europe | 900 | 75 | yes | [upstream](https://tf2-casual-fun.de/) |
+| 95 | UGC-Gaming.net — SourceBans | sourcebans | global | 1,500 | 80 | yes | [upstream](https://www.ugc-gaming.net/) |
+<!-- sources-table:end -->
 
 ## Notes
 

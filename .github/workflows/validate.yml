@@ -1,0 +1,106 @@
+name: validate
+
+# Runs the unit tests, then checks that what is committed is internally
+# consistent: valid JSON, valid JS, and generated files that match what
+# scripts/ produces from data/normalized/*.csv right now. The last check
+# catches the easy mistake of committing new source data without rerunning
+# recompute_confidence.py. Nothing here touches a database or fetches from
+# an upstream source, so it is safe to run on every push.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: JSON files parse
+        run: |
+          python3 -c "
+          import json, pathlib, sys
+          bad = []
+          for p in pathlib.Path('docs/data').glob('*.json'):
+              try:
+                  json.loads(p.read_text())
+              except Exception as exc:
+                  bad.append(f'{p}: {exc}')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          print('all docs/data/*.json parse OK')
+          "
+
+      - name: CSV files parse and have the columns scripts/ expects
+        run: |
+          python3 -c "
+          import csv, pathlib, sys
+          required = {
+              'accounts.csv': {'steamid64', 'account_id', 'steam3'},
+              'sources.csv': {'source_id', 'slug', 'name', 'source_type', 'upstream_repo', 'update_url'},
+              'source_profiles.csv': {'source_id', 'base_weight', 'independence_group', 'counts_toward_confidence'},
+              'source_records.csv': {'source_record_id', 'source_id', 'steamid64', 'record_hash', 'raw_record'},
+              'flags.csv': {'flag_id', 'steamid64', 'source_id', 'flag', 'active'},
+              'aliases.csv': {'alias_id', 'steamid64', 'source_id', 'player_name'},
+              'evidence.csv': {'evidence_id', 'steamid64', 'source_id', 'content'},
+              'confidence.csv': {'steamid64', 'confidence_score', 'confidence_tier', 'all_sources'},
+          }
+          bad = []
+          for name, cols in required.items():
+              path = pathlib.Path('data/normalized') / name
+              with path.open(newline='', encoding='utf-8') as f:
+                  reader = csv.DictReader(f)
+                  missing = cols - set(reader.fieldnames or [])
+                  if missing:
+                      bad.append(f'{name}: missing columns {missing}')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          print('all data/normalized/*.csv have the expected columns')
+          "
+
+      - name: JS syntax
+        run: |
+          node --check docs/app.js
+          node --check docs/sources.js
+
+      - name: Generated files match data/normalized/*.csv
+        # summary.json / meta.json carry a generated_at timestamp so they're
+        # never byte-identical between two runs — intentionally not checked
+        # here. Everything else regenerated below has no such excuse.
+        run: |
+          mkdir /tmp/before
+          cp data/normalized/confidence.csv data/normalized/account_summary.csv SOURCES.md /tmp/before/
+          cp docs/data/accounts.json docs/data/sources.json /tmp/before/
+
+          python3 scripts/recompute_confidence.py
+          python3 scripts/export_site_data.py
+          python3 scripts/generate_sources_md.py
+
+          fail=0
+          check() {
+            if ! diff -q "/tmp/before/$(basename "$1")" "$1" > /dev/null; then
+              echo "::error::$1 is out of date — run the scripts in scripts/README.md and commit the result"
+              diff "/tmp/before/$(basename "$1")" "$1" | head -20
+              fail=1
+            fi
+          }
+          check data/normalized/confidence.csv
+          check data/normalized/account_summary.csv
+          check SOURCES.md
+          check docs/data/accounts.json
+          check docs/data/sources.json
+          exit $fail

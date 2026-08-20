@@ -4,7 +4,7 @@ TF2 Sentinel is a searchable community database that combines public TF2 cheater
 
 **Website:** https://unusualhatter.github.io/TF2-Sentinel/
 
-**Current snapshot:** 32,921 SteamIDs · 49,888 source records · 91 sources · updated August 18, 2026.
+**Current snapshot:** 36,307 SteamIDs · 54,317 source records · 95 sources · updated August 19, 2026.
 
 ## Database
 
@@ -20,8 +20,26 @@ The score is meant to show how strongly an account is corroborated across availa
 - `data/normalized/` — normalized database exports
 - `data/reference/` — server and reference data
 - `db/init/` — PostgreSQL schema and database seed
+- `scripts/` — the pipeline that builds the two above from upstream sources
 
 Upstream lists are not re-hosted here. Each source keeps its original URL in [SOURCES.md](SOURCES.md) and in `docs/data/sources.json`.
+
+## Updating the database
+
+The scripts in `scripts/` download new ban lists, add them to
+`data/normalized/`, and rebuild everything generated from it: the
+confidence scores, the website's JSON files and the source table in
+`SOURCES.md`. They need only Python 3.10 or newer, with nothing to
+install.
+
+[scripts/README.md](scripts/README.md) explains how to run them and how to
+add a new source.
+
+The confidence formula exists twice: in `db/init/005_confidence_views.sql`
+for anyone querying the data in PostgreSQL, and in
+`scripts/recompute_confidence.py` so the site can be rebuilt without a
+database. The two are checked against each other and must always be
+changed together.
 
 ## Public data
 
