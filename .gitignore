@@ -8,3 +8,13 @@ __pycache__/
 # Local maintenance workspace: sync tooling, scraped inputs and backups.
 # Nothing in here is part of the published repository.
 _local/
+
+# Temp and IDE files
+.vscode/
+.idea/
+scratch/
+*.tmp
+*.bak
+*.log
+*.swp
+*~
