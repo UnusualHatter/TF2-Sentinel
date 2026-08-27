@@ -23,19 +23,29 @@
   var FLAG_LABELS = {
     server_ban: 'Server ban (not cheating)',
     clear: 'Listed as legitimate',
-    cheater_supporter: 'Cheater supporter'
+    cheater_supporter: 'Cheater supporter',
+    owner: 'Project owner'
   };
+
+  // Flags that say something about an account without asserting it cheated.
+  var NO_CHEATING_SIGNAL = { server_ban: true, clear: true, owner: true };
 
   var dataset = null;
   var profiles = data.emptyProfiles;
   var sources = new Map();
   var searchIndex = null;
   var filtered = new Int32Array(0);
+  // The unfiltered list is the same order every time; sorting 36,000 rows on
+  // every keystroke that clears the box would be wasted work.
+  var allSorted = null;
   var page = 1;
   var expandedId = '';
   var searchTimer = 0;
   var idleHandle = 0;
   var warmedFrom = -1;
+  // The database date in meta.json is rendered in this zone, so the profile
+  // date has to use it too or the two lines disagree by a day.
+  var siteTimezone = 'UTC';
 
   var q = document.getElementById('q');
   var tier = document.getElementById('tier');
@@ -54,6 +64,28 @@
   var cancelIdle = window.cancelIdleCallback
     ? function (handle) { window.cancelIdleCallback(handle); }
     : function (handle) { window.clearTimeout(handle); };
+
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+
+  // Matches the wording export_site_data.py writes for the database date.
+  function formatDay(iso) {
+    var when = new Date(iso);
+    if (isNaN(when.getTime())) return '';
+    try {
+      return new Intl.DateTimeFormat('en-US', {
+        timeZone: siteTimezone, month: 'long', day: 'numeric', year: 'numeric'
+      }).format(when);
+    } catch (error) {
+      return MONTHS[when.getUTCMonth()] + ' ' + when.getUTCDate() + ', ' + when.getUTCFullYear();
+    }
+  }
+
+  function renderProfileDate() {
+    if (!profileUpdate || !profiles.generatedAt) return;
+    var day = formatDay(profiles.generatedAt);
+    if (day) profileUpdate.textContent = 'Steam profiles refreshed: ' + day;
+  }
 
   function sourceFor(slug) {
     return sources.get(slug) || null;
@@ -120,7 +152,9 @@
     var flags = dataset.flagsFor(row);
     var chips = '';
     for (var f = 0; f < flags.length; f += 1) {
-      chips += '<span class="flag-chip">' + esc(FLAG_LABELS[flags[f]] || flags[f]) + '</span>';
+      var chipClass = flags[f] === 'owner' ? 'flag-chip owner-badge' : 'flag-chip';
+      chips += '<span class="' + chipClass + '">' + esc(FLAG_LABELS[flags[f]] || flags[f])
+        + '</span>';
     }
 
     return '<tr class="detail-row"><td colspan="5"><div class="detail-panel">'
@@ -135,7 +169,7 @@
   function hasCheatingSignal(row) {
     var flags = dataset.flagsFor(row);
     for (var i = 0; i < flags.length; i += 1) {
-      if (flags[i] !== 'server_ban' && flags[i] !== 'clear') return true;
+      if (!NO_CHEATING_SIGNAL[flags[i]]) return true;
     }
     return false;
   }
@@ -169,6 +203,9 @@
     var steamid64 = dataset.steamId64(row);
     var slot = data.profileSlot(profiles, dataset.ids[row]);
     var name = data.profileName(profiles, slot) || dataset.names[row] || 'Unknown';
+    var badge = dataset.flagsFor(row).indexOf('owner') !== -1
+      ? '<span class="owner-badge" title="Runs this project">Owner</span>'
+      : '';
     var expanded = expandedId === steamid64;
     var loading = position < EAGER_AVATARS
       ? ' loading="eager" fetchpriority="high"'
@@ -179,6 +216,7 @@
       + '<img class="avatar" src="' + esc(avatarFor(row, slot)) + '" alt="" width="40" height="40"'
       + loading + ' decoding="async" referrerpolicy="no-referrer">'
       + '<span class="player-name" title="' + esc(name) + '">' + esc(name) + '</span>'
+      + badge
       + '</div></td>'
       + '<td><span class="steamid mono">' + steamid64 + '</span></td>'
       + '<td>' + confidenceCell(row) + '</td>'
@@ -281,7 +319,13 @@
     // column; anything else needs the text index, so build it now if the idle
     // callback has not got round to it.
     if (data.parseSearch(q.value).terms.length) ensureSearchIndex();
-    filtered = data.search(dataset, searchIndex, q.value, tier.value);
+    var matched = data.search(dataset, searchIndex, q.value, tier.value);
+    if (matched.length === dataset.count) {
+      if (!allSorted) allSorted = data.sortByConfidence(dataset, matched);
+      filtered = allSorted;
+    } else {
+      filtered = data.sortByConfidence(dataset, matched);
+    }
     page = 1;
     expandedId = '';
     warmedFrom = -1;
@@ -328,6 +372,7 @@
   function setDataset(next) {
     dataset = next;
     searchIndex = null;
+    allSorted = null;
     applyFilters();
   }
 
@@ -364,12 +409,7 @@
           whenIdle(ensureSearchIndex);
         }
       }
-      if (profileUpdate && profiles.generatedAt) {
-        var when = new Date(profiles.generatedAt);
-        if (!isNaN(when.getTime())) {
-          profileUpdate.textContent = 'Steam profiles refreshed: ' + when.toISOString().slice(0, 10);
-        }
-      }
+      renderProfileDate();
     }).catch(function () { /* the table keeps rendering without profile data */ });
 
     Promise.all([bundlePromise, sourcesPromise]).then(function (loaded) {
@@ -394,7 +434,14 @@
     });
 
     metaPromise.then(function (meta) {
-      if (meta && meta.last_database_update_display) {
+      if (!meta) return;
+      if (typeof meta.timezone === 'string' && meta.timezone) {
+        siteTimezone = meta.timezone;
+        // Profiles may have landed before meta did; redo that line now the
+        // zone is known.
+        renderProfileDate();
+      }
+      if (meta.last_database_update_display) {
         lastUpdate.textContent = 'Last database update: ' + meta.last_database_update_display;
       }
     }).catch(function () { /* the header keeps its placeholder */ });

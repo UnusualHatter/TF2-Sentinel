@@ -110,6 +110,7 @@ A source with **Counts = no** is retained for reference, identity history, mirro
 | 101 | SG-Gaming — community bans | sourcebans | global | 1,107 | 78 | yes | [upstream](https://steamhistory.net/) |
 | 102 | Sappho.io — community bans | sourcebans | global | 752 | 78 | yes | [upstream](https://steamhistory.net/) |
 | 103 | dpg.tf — community bans | sourcebans | global | 1,799 | 78 | yes | [upstream](https://steamhistory.net/) |
+| 104 | TF2 Sentinel — project annotations | project reference | global | 1 | 0 | no | [upstream](https://github.com/UnusualHatter/TF2-Sentinel) |
 <!-- sources-table:end -->
 
 ## Notes

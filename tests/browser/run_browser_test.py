@@ -137,13 +137,15 @@ XSS_PAYLOADS = [
 
 
 def poisoned_profiles() -> bytes:
-    """The published profile cache with hostile persona names in the first rows."""
+    """The published profile cache with every persona name replaced by a payload.
+
+    Every name rather than the first few: the table is ordered by confidence,
+    so poisoning entries by their position in the cache would put them on a
+    page the test never looks at.
+    """
     raw = json.loads((DOCS / "data" / "profiles.json").read_text(encoding="utf-8"))
     names = raw.get("names") or []
-    for index, payload in enumerate(XSS_PAYLOADS):
-        if index < len(names):
-            names[index] = payload
-    raw["names"] = names
+    raw["names"] = [XSS_PAYLOADS[i % len(XSS_PAYLOADS)] for i in range(len(names))]
     return json.dumps(raw, ensure_ascii=False).encode("utf-8")
 
 

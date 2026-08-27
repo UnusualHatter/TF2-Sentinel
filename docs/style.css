@@ -91,6 +91,34 @@ tbody tr:last-child td { border-bottom: 0; }
 .flag-list { display: flex; flex-wrap: wrap; gap: 5px; }
 .flag-chip { display: inline-block; padding: 1px 6px; border: 1px solid var(--border); border-radius: 4px; font-size: 11px; color: var(--muted); }
 
+/* The one account that runs this project. Pride colours sweep across the badge
+   and the glow breathes; both stop for anyone who asked for less motion. */
+.owner-badge {
+  flex: 0 0 auto;
+  display: inline-block;
+  padding: 2px 8px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
+  background-image: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787, #e40303);
+  background-size: 300% 100%;
+  animation: owner-sweep 7s linear infinite, owner-glow 3.2s ease-in-out infinite;
+}
+@keyframes owner-sweep { from { background-position: 0 0; } to { background-position: -300% 0; } }
+@keyframes owner-glow {
+  0%, 100% { box-shadow: 0 0 4px rgba(255,255,255,.22), 0 0 10px rgba(228,3,3,.28); }
+  50%      { box-shadow: 0 0 10px rgba(255,255,255,.5), 0 0 22px rgba(117,7,135,.5); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .owner-badge { animation: none; background-size: 100% 100%; box-shadow: 0 0 6px rgba(255,255,255,.28); }
+}
+
 .site-footer { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 22px 0 4px; font-size: 13px; color: var(--muted); }
 
 .source-table { width: 100%; min-width: 1080px; border-collapse: collapse; table-layout: fixed; font-size: 14px; }

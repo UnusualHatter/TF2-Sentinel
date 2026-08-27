@@ -102,3 +102,4 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 101,78,strong,sg-gaming,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
 102,78,strong,sappho-io,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
 103,78,strong,dpg-tf,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+104,0,none,tf2-sentinel-project,false,false,project-annotation,2026-08-27,"Identity annotations only. Never a cheating determination, so it must not contribute to a score."

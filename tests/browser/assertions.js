@@ -84,6 +84,16 @@
   function runChecks() {
     check('the profile cache is applied to the rendered table', true);
 
+    // Both header dates are rendered in the snapshot's own time zone, so they
+    // must read the same way; one in ISO and one spelled out looks like a bug.
+    var dbDate = document.getElementById('last-update').textContent
+      .replace('Last database update: ', '');
+    var profileDate = document.getElementById('profile-update').textContent
+      .replace('Steam profiles refreshed: ', '');
+    var spelled = /^[A-Z][a-z]+ \d{1,2}, \d{4}$/;
+    check('the database date is spelled out', spelled.test(dbDate), dbDate);
+    check('the profile date is spelled out the same way', spelled.test(profileDate), profileDate);
+
     var avatars = document.querySelectorAll('#rows img.avatar');
     var allowed = /^(avatar-placeholder\.svg|https:\/\/avatars\.steamstatic\.com\/[0-9a-f]{40}_medium\.jpg)$/;
     var badAvatar = null;
@@ -108,6 +118,20 @@
       if (span.textContent && span.textContent !== 'Unknown') named += 1;
     });
     check('persona names from the profile cache are shown', named > 25, named + '/50');
+
+    // Strongest corroboration first, so page one is the part worth reading.
+    function scoresOnPage() {
+      var out = [];
+      document.querySelectorAll('#rows tr.account-row .confidence strong').forEach(function (el) {
+        var value = parseFloat(el.textContent);
+        out.push(isNaN(value) ? -1 : value);
+      });
+      return out;
+    }
+    var scores = scoresOnPage();
+    var descending = scores.every(function (v, i) { return i === 0 || v <= scores[i - 1]; });
+    check('the first page is ordered by confidence, strongest first', descending,
+      scores.slice(0, 8).join(' '));
 
     var links = document.querySelectorAll('#rows .profile-links a');
     check('profile links point at Steam and SteamHistory',
@@ -271,6 +295,27 @@
         check('every moderation link is a plain web link', !bad, bad);
       }, function (error) {
         check('the servers page renders', false, error && error.message);
+      });
+    }).then(function () {
+      // The owner annotation: a badge on the row, animated, and never counted
+      // as a cheating signal.
+      typeSearch('76561199088026388');
+      return waitFor(function () { return rows().length === 1; }, 8000).then(function () {
+        var badge = document.querySelector('#rows .owner-badge');
+        check('the owner account shows its badge', !!badge, 'no .owner-badge rendered');
+        if (!badge) return;
+        check('the badge reads Owner', badge.textContent.trim() === 'Owner', badge.textContent);
+        var style = getComputedStyle(badge);
+        check('the badge is animated', style.animationName !== 'none' && style.animationName !== '',
+          style.animationName);
+        check('the badge carries a gradient', /gradient/.test(style.backgroundImage),
+          style.backgroundImage.slice(0, 40));
+        var confidence = document.querySelector('#rows .confidence');
+        check('the owner account is not shown as a cheating signal',
+          confidence && confidence.classList.contains('confidence-none'),
+          confidence ? confidence.className : 'none');
+      }, function (error) {
+        check('the owner account shows its badge', false, error && error.message);
       });
     }).then(report, function (error) {
       check('the assertion run finished', false, error && error.message);

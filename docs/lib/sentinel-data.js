@@ -80,6 +80,14 @@ var SentinelData = (function () {
   /* ---- dataset -------------------------------------------------------- */
 
   function makeDataset(fields) {
+    // The published score is a string so it displays exactly as generated;
+    // ordering needs the number, and there are only a couple of hundred
+    // distinct ones, so they are converted once rather than per comparison.
+    fields.scoreValues = fields.scores.map(function (value) {
+      var number = parseFloat(value);
+      return isNaN(number) ? 0 : number;
+    });
+    fields.scoreOf = function (row) { return fields.scoreValues[fields.score[row]]; };
     fields.steamId64 = function (row) { return steamId64(fields.ids[row]); };
     fields.steam3 = function (row) { return steam3(fields.ids[row]); };
     fields.slugsFor = function (row) {
@@ -455,6 +463,16 @@ var SentinelData = (function () {
     return matches.subarray(0, count);
   }
 
+  /* Strongest corroboration first. Ties fall back to database order so the
+   * same query always produces the same page, and so paging is stable. */
+  function sortByConfidence(dataset, rows) {
+    var sorted = rows.slice();
+    sorted.sort(function (a, b) {
+      return dataset.scoreOf(b) - dataset.scoreOf(a) || a - b;
+    });
+    return sorted;
+  }
+
   /* ---- source presentation ------------------------------------------- */
 
   var LEAGUE_SLUG_RE = /(rgl|etf2l|ugc|ozfortress|brasil-fortress)/;
@@ -529,6 +547,7 @@ var SentinelData = (function () {
     buildSearchIndex: buildSearchIndex,
     rowAtOffset: rowAtOffset,
     search: search,
+    sortByConfidence: sortByConfidence,
     sourceBadge: sourceBadge,
     tierLabel: tierLabel,
     prepareSources: prepareSources,

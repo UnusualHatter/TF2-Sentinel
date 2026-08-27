@@ -43,6 +43,7 @@ MULTIPLIER = {
     "cheater_supporter": Decimal("0.10"),
     "server_ban": Decimal("0.00"),
     "clear": Decimal("0.00"),
+    "owner": Decimal("0.00"),
 }
 DEFAULT_MULTIPLIER = Decimal("0.20")
 MAX_CONTRIBUTION = Decimal("99.5")

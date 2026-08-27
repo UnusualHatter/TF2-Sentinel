@@ -4,7 +4,7 @@ TF2 Sentinel is a searchable community database that combines public TF2 cheater
 
 **Website:** https://unusualhatter.github.io/TF2-Sentinel/
 
-**Current snapshot:** 36,309 SteamIDs · 82,192 source records · 103 sources · updated August 26, 2026.
+**Current snapshot:** 36,310 SteamIDs · 82,193 source records · 104 sources · updated August 26, 2026.
 
 ## Database
 

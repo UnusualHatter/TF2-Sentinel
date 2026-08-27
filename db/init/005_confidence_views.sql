@@ -17,6 +17,8 @@ SELECT
             -- source stating the account is clear must not raise confidence.
             WHEN 'server_ban' THEN 0.00
             WHEN 'clear' THEN 0.00
+            -- Identity annotation, not an assessment of the account.
+            WHEN 'owner' THEN 0.00
             ELSE 0.20
         END
     ) AS contribution

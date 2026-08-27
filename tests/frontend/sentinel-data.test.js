@@ -318,3 +318,58 @@ test('the tier filter still applies to an identifier query', () => {
   assert.equal(data.search(dataset, null, dataset.steamId64(row), tier).length, 1);
   assert.equal(data.search(dataset, null, dataset.steamId64(row), other).length, 0);
 });
+
+test('results come back strongest first, whatever the query', () => {
+  const index = data.buildSearchIndex(dataset, profiles, sourceLabel);
+  const cases = [['', ''], ['', 'very_high'], ['', 'medium'], ['', 'unscored'],
+    ['sourcebans', ''], ['bot', 'high'], ['server ban', '']];
+  for (const [query, tier] of cases) {
+    const rows = data.sortByConfidence(dataset, data.search(dataset, index, query, tier));
+    for (let i = 1; i < rows.length; i += 1) {
+      assert.ok(dataset.scoreOf(rows[i]) <= dataset.scoreOf(rows[i - 1]),
+        `out of order for ${JSON.stringify(query)}/${tier} at ${i}`);
+    }
+    if (tier) {
+      for (const row of rows) assert.equal(dataset.tiers[dataset.tier[row]], tier);
+    }
+  }
+});
+
+test('sorting keeps exactly the rows it was given', () => {
+  const index = data.buildSearchIndex(dataset, profiles, sourceLabel);
+  const matched = data.search(dataset, index, 'sourcebans', '');
+  const sorted = data.sortByConfidence(dataset, matched);
+  assert.equal(sorted.length, matched.length);
+  assert.deepEqual([...sorted].sort((a, b) => a - b), [...matched].sort((a, b) => a - b));
+});
+
+test('sorting does not disturb what it was handed', () => {
+  const matched = data.search(dataset, null, '', 'very_high');
+  const copy = [...matched];
+  data.sortByConfidence(dataset, matched);
+  assert.deepEqual([...matched], copy, 'the caller\'s array must be left alone');
+});
+
+test('accounts on the same score keep a stable order', () => {
+  const rows = data.sortByConfidence(dataset, data.search(dataset, null, '', ''));
+  const again = data.sortByConfidence(dataset, data.search(dataset, null, '', ''));
+  assert.deepEqual([...rows], [...again]);
+  for (let i = 1; i < rows.length; i += 1) {
+    if (dataset.scoreOf(rows[i]) === dataset.scoreOf(rows[i - 1])) {
+      assert.ok(rows[i] > rows[i - 1], 'ties must fall back to database order');
+    }
+  }
+});
+
+test('the owner annotation is not read as a cheating signal', () => {
+  const owner = dataset.slugs.indexOf('tf2-sentinel-project');
+  if (owner < 0) return;
+  let found = 0;
+  for (let i = 0; i < dataset.count; i += 1) {
+    if (dataset.flagsFor(i).indexOf('owner') === -1) continue;
+    found += 1;
+    assert.equal(dataset.scores[dataset.score[i]], '0.0');
+    assert.equal(dataset.tiers[dataset.tier[i]], 'unscored');
+  }
+  assert.ok(found > 0, 'expected at least one account carrying the owner flag');
+});

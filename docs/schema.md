@@ -7,7 +7,7 @@ The normalized CSV data and PostgreSQL schema use the same basic model.
 - `sources` — upstream source catalog.
 - `source_profiles` — confidence weight, independence group and assessment rules for each source.
 - `source_records` — raw imported source records kept for provenance.
-- `flags` — classifications asserted by a source (`cheater`, `bot`, `suspicious`, `watched`, `exploiter`, and related values). `server_ban` records a public server ban whose stated reason is not a cheating determination, and `clear` records a source stating the account is legitimate; neither carries confidence weight.
+- `flags` — classifications asserted by a source (`cheater`, `bot`, `suspicious`, `watched`, `exploiter`, and related values). `server_ban` records a public server ban whose stated reason is not a cheating determination, `clear` records a source stating the account is legitimate, and `owner` marks the account running this project; none of the three carries confidence weight.
 - `evidence` — public proof/note/ban-reason material kept separately from classifications.
 - `reviews` — optional local moderation decisions that can override imported state without destroying provenance.
 - `servers` / `bans` — PostgreSQL tables for public community-server moderation records.
