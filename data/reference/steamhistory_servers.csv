@@ -1,0 +1,36 @@
+server,decision,source_slug,name,scope_region,base_weight,independence_group,notes
+BlackWonder,map,blackwonder-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+Panda-Community,map,panda-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+UGC-Gaming,map,ugc-gaming-net-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+Skial,map,skial-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+Flux.tf,map,flux-tf-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+dpg.tf,register,dpg-tf-sourcebans,dpg.tf — community bans,global,78,dpg-tf,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+FirePowered Gaming,map,firepowered-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+FurryPound,map,furrypound-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+Scrap.tf,map,scrap-tf-sourcebans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+DISC-FF,map,discff-community-bans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+SG-Gaming.net,register,sg-gaming-sourcebans,SG-Gaming — community bans,global,78,sg-gaming,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+GFLClan.com,map,gfl-community-bans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+Sappho.io,register,sappho-io-sourcebans,Sappho.io — community bans,global,78,sappho-io,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+LBGaming,register,lbgaming-sourcebans,LBGaming — community bans,global,78,lbgaming,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+etf2l.org,map,etf2l-cheating-bans,,,,,Community already registered; records attach to that source so they share its independence group and cannot count twice.
+RetroServers.net,register,retroservers-sourcebans,RetroServers.net — community bans,global,78,retroservers,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+Pubs.tf,register,pubs-tf-sourcebans,Pubs.tf — community bans,global,78,pubs-tf,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+Liquid.tf,register,liquid-tf-sourcebans,Liquid.tf — community bans,global,78,liquid-tf,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+Spoonkid,skip,,,,,,Could not confirm this is a TF2 community. Left out rather than guessed at.
+Icefuse,skip,,,,,,Could not confirm this is a TF2 community. Left out rather than guessed at.
+Paranoid.gg,skip,,,,,,Could not confirm this is a TF2 community. Left out rather than guessed at.
+Rustopia,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+BloodRust,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+Winterust,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+RenegadeRust,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+MagicRust,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+Mainloot,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+NOVOSIB,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+RustForNoobs,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+AseanPanda,skip,,,,,,Could not confirm this is a TF2 community. Left out rather than guessed at.
+Brasa,skip,,,,,,Could not confirm this is a TF2 community. Left out rather than guessed at.
+MirageRust,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+RENEGADE,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+RUSTOLUTION.GG,skip,,,,,,Rust community; a SourceBans record there is not TF2 evidence.
+TMKBUD,skip,,,,,,Could not confirm this is a TF2 community. Left out rather than guessed at.

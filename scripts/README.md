@@ -27,13 +27,25 @@ python -m unittest discover -s tests
         |
         |  recompute_confidence.py  scores every account
         |  export_site_data.py      writes docs/data/*.json for the website
+        |  build_site_bundle.py     writes the compact copy the site loads
         |  generate_sources_md.py   writes the table in SOURCES.md
         v
   everything else
 ```
 
+Steam persona names and avatars are on a separate track. They are not derived
+from the CSVs and are not part of a database import:
+
+```
+  docs/data/accounts.json
+        |
+        |  refresh_steam_profiles.py   asks the Steam Web API for each account
+        v
+  docs/data/profiles.json              <- what the website shows for a player
+```
+
 The CSV files are the source of truth. Everything else is generated from
-them, so if you change a CSV you must re-run the last three scripts.
+them, so if you change a CSV you must re-run the last four scripts.
 
 PostgreSQL is optional. `db/init/` holds the same data as SQL for anyone
 who wants to query it properly, but the pipeline never needs it.
@@ -97,6 +109,7 @@ and duplicates are skipped.
 ```bash
 python scripts/recompute_confidence.py
 python scripts/export_site_data.py
+python scripts/build_site_bundle.py
 python scripts/generate_sources_md.py
 ```
 
@@ -106,6 +119,78 @@ Update the snapshot line in the top-level `README.md`, then run
 `git diff --stat`. Expect a few thousand added rows and a handful of
 changed files. If it reports that all 36,000 accounts changed, something
 went wrong, and it is usually line endings.
+
+## Refreshing Steam profiles
+
+`docs/data/profiles.json` holds the persona name and avatar Steam currently
+serves for every account, so the website never has to ask Steam anything. The
+`refresh steam profiles` workflow rebuilds it every morning from the
+`STEAM_WEB_API_KEY` repository secret, and there is nothing to do by hand.
+
+To run it locally, get a key from https://steamcommunity.com/dev/apikey:
+
+```bash
+STEAM_WEB_API_KEY=... python scripts/refresh_steam_profiles.py
+```
+
+It asks `ISteamUser/GetPlayerSummaries` for 100 accounts at a time, stalest
+first, and merges what comes back. A run that fails to reach Steam leaves the
+published file exactly as it was; it never blanks an avatar because a request
+timed out. `--dry-run` reports what it would fetch without contacting anything.
+
+The key is only ever read from the environment. `scripts/check_profiles.py`
+fails the build if anything shaped like one turns up in the generated file.
+
+## Looking up community bans through SteamHistory
+
+SteamHistory aggregates the SourceBans installations of a lot of communities.
+Asking it about accounts already in this database finds bans from servers that
+have never been imported here, without having to locate and scrape each one.
+
+```bash
+STEAMHISTORY_API_KEY=... python scripts/fetch_steamhistory_bans.py \
+    --out /tmp/steamhistory.json --max-requests 20
+```
+
+Get a key by logging into https://steamhistory.net/api with a Steam account.
+The endpoint takes up to 100 SteamIDs per call, so the whole database is a few
+hundred requests. `--max-requests` bounds a run and `--offset` continues one
+that was interrupted.
+
+Two things about this API are worth knowing before touching the code. It
+answers **HTTP 200 even when it rejects the request**, putting the problem in
+an `error` field, so the status code on its own means nothing. And it is a
+lookup, not a dump: there is no documented way to ask for every SteamID it
+knows about, which is why this enriches accounts you already have rather than
+discovering new ones.
+
+Like `fetch_sourcebans.py`, this only downloads and normalizes. It writes one
+JSON file and changes no CSV, because the result needs a provenance decision
+first:
+
+- Each record keeps the community that issued the ban in `server`, with
+  SteamHistory recorded as the route it arrived by. A ban from BlackWonder is
+  evidence from BlackWonder, not from SteamHistory.
+- The report groups records by community and says which ones already match a
+  registered source. Those are **mirrors of data already imported** and must
+  share that source's `independence_group`, or the same ban counts twice and
+  inflates the score. Communities that match nothing are new evidence and need
+  a source row of their own.
+- Where a name matches more than one registered source, every candidate is
+  listed rather than one being guessed at.
+
+Once the lookup file exists, merge it:
+
+```bash
+python scripts/merge_steamhistory.py --records /tmp/steamhistory.json --dry-run
+python scripts/merge_steamhistory.py --records /tmp/steamhistory.json
+```
+
+The merge reads `data/reference/steamhistory_servers.csv`, which records one
+decision per community: `map` it onto the source it already has, `register` a
+new one, or `skip` it. A community that is not in that table is reported and
+left out; guessing would put bans from another game into a TF2 database, which
+is how the Rust servers SteamHistory also covers would have got in.
 
 ## Adding a tf2bd-style playerlist
 
@@ -160,7 +245,13 @@ wrong. Find out which before committing.
 | `lib/classify.py` | Decides if a ban reason means cheating | `tests/test_classify.py` |
 | `lib/dateparse.py` | Reads the many date formats these sites print | `tests/test_dateparse.py` |
 | `fetch_sourcebans.py` | Downloads one ban list and saves it as JSON | |
+| `fetch_steamhistory_bans.py` | Looks up community bans for known accounts | `tests/test_steamhistory.py` |
 | `merge_sourcebans.py` | Adds a downloaded ban list to the CSVs | |
 | `recompute_confidence.py` | Scores every account | |
 | `export_site_data.py` | Writes the website's JSON files | |
+| `build_site_bundle.py` | Writes the compact copy of accounts.json the site loads | `tests/frontend/` |
+| `refresh_steam_profiles.py` | Refreshes persona names and avatars from Steam | `tests/test_steam_profiles.py` |
+| `check_profiles.py` | Checks the published profile cache is well formed | |
+| `merge_steamhistory.py` | Adds looked-up community bans to the CSVs | `tests/test_merge_steamhistory.py` |
+| `ingest.py` | Re-fetches the tf2bd playerlists listed in sources.csv | |
 | `generate_sources_md.py` | Writes the source table in `SOURCES.md` | |

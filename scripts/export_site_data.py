@@ -132,6 +132,16 @@ def main() -> int:
     write_json(DOCS_DATA_DIR / "meta.json", meta)
     print(f"meta.json: snapshot dated {meta['last_database_update']}")
 
+    import re
+    readme_path = ROOT / "README.md"
+    content = readme_path.read_text("utf-8")
+    accounts_str = f"{meta['unique_accounts']:,}"
+    records_str = f"{meta['source_records']:,}"
+    sources_str = f"{meta['registered_sources']}"
+    date_str = meta['last_database_update_display']
+    new_line = f"**Current snapshot:** {accounts_str} SteamIDs · {records_str} source records · {sources_str} sources · updated {date_str}."
+    content = re.sub(r"\*\*Current snapshot:\*\*.*", new_line, content)
+    readme_path.write_text(content, "utf-8")
     return 0
 
 

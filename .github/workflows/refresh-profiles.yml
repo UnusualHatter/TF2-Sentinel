@@ -1,0 +1,103 @@
+name: refresh steam profiles
+
+# Rebuilds docs/data/profiles.json from the Steam Web API so the site shows the
+# avatar and persona name each account currently has. Runs after the database
+# update workflow so accounts added that morning are resolved the same day.
+#
+# Needs one repository secret: STEAM_WEB_API_KEY.
+#
+# 36,000 accounts is 364 calls at the endpoint's documented maximum of 100 IDs
+# each, so a full pass is cheap. A run that cannot reach Steam changes nothing.
+
+on:
+  schedule:
+    - cron: "30 3 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Refresh accounts already checked today"
+        type: boolean
+        default: false
+      max_requests:
+        description: "Upper bound on API calls for this run"
+        type: string
+        default: "1000"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-steam-profiles
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history: the push below rebases if the database update workflow
+          # committed first, and a rebase needs a merge base to work from.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check the API key is configured
+        env:
+          STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
+        run: |
+          if [ -z "$STEAM_WEB_API_KEY" ]; then
+            echo "::error::STEAM_WEB_API_KEY is not set. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      # Inputs go through the environment rather than into the script line:
+      # a workflow_dispatch value is attacker-controlled text and must never be
+      # pasted into a shell command.
+      - name: Refresh profiles
+        env:
+          STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
+          FORCE: ${{ inputs.force }}
+          MAX_REQUESTS: ${{ inputs.max_requests }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [ "${FORCE:-false}" = "true" ]; then args+=("--force"); fi
+          case "${MAX_REQUESTS:-}" in
+            ''|*[!0-9]*) ;;
+            *) args+=("--max-requests" "$MAX_REQUESTS") ;;
+          esac
+          python3 scripts/refresh_steam_profiles.py "${args[@]}" | tee /tmp/refresh.log
+
+      - name: Commit the refreshed cache
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- docs/data/profiles.json; then
+            echo "profiles.json is unchanged" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/profiles.json
+          git commit -m "Refresh Steam profile cache"
+          # The database update workflow commits to the same branch, so a push
+          # can lose a race with it. The rebase replays this one commit on top
+          # of whatever landed first and never touches anything else.
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            git pull --rebase origin "$GITHUB_REF_NAME"
+          done
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Steam profile refresh"
+            echo ''
+            echo '```'
+            cat /tmp/refresh.log 2>/dev/null || echo "the refresh step produced no output"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -48,11 +48,13 @@ def to_steam64(value: str) -> int | None:
     return None
 
 
-def to_steam3(steamid64: int) -> str:
+def to_steam3(steamid64: int | str) -> str:
+    steamid64 = int(steamid64)
     """Render a SteamID64 as steam3 ``[U:1:N]`` for display/exports."""
     return f"[U:1:{steamid64 - _BASE}]"
 
 
-def account_id(steamid64: int) -> int:
+def account_id(steamid64: int | str) -> int:
+    steamid64 = int(steamid64)
     """The account_id component the schema's CHECK constraint expects."""
     return steamid64 - _BASE

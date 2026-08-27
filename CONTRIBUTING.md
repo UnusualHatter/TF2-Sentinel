@@ -33,6 +33,30 @@ Run the tests before opening a pull request:
 
 ```bash
 python -m unittest discover -s tests
+node --test tests/frontend/*.test.js
+```
+
+If you changed anything under `docs/`, it is worth driving the real page as
+well. This serves the site and checks it in a headless browser, and skips
+quietly if you have neither Firefox nor Chromium installed:
+
+```bash
+python tests/browser/run_browser_test.py
+```
+
+Player names come from ban lists and from Steam, so they are hostile input.
+This serves the site with persona names crafted to break out of the markup and
+checks that none of them can:
+
+```bash
+python tests/browser/run_browser_test.py --poison --assertions tests/browser/xss.js
+```
+
+If you are changing how the site loads or searches, `tests/frontend/benchmark.js`
+reports parse, index and query timings against the committed database:
+
+```bash
+node --expose-gc tests/frontend/benchmark.js
 ```
 
 `lib/classify.py` and `lib/sourcebans.py` are the two places most likely

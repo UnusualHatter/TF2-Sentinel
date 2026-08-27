@@ -10,6 +10,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/favicon-180.png">
 <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://avatars.steamstatic.com" crossorigin>
+<script src="lib/sentinel-data.js" defer></script>
+<script src="app.js" defer></script>
 </head>
 <body class="accounts-page">
 <main class="page-shell">
@@ -21,14 +24,17 @@
       <p>Public unified cheater database. Under development!</p>
     </div>
   </div>
-  <div class="db-update" id="last-update">Last database update: —</div>
+  <div class="db-update">
+    <div id="last-update">Last database update: —</div>
+    <div id="profile-update" class="db-update-secondary"></div>
+  </div>
 </header>
 
 <div class="sticky-tools">
   <section class="controls" aria-label="Database filters">
     <label class="search-field">
       <span class="sr-only">Search accounts</span>
-      <input id="q" type="search" placeholder="Search SteamID64, Steam3, player name or source" autocomplete="off" spellcheck="false">
+      <input id="q" type="search" placeholder="Search a SteamID, profile link, player name or source" autocomplete="off" spellcheck="false">
     </label>
     <label class="tier-field">
       <span class="sr-only">Confidence tier</span>
@@ -77,11 +83,11 @@
 
 <footer class="site-footer">
   <a href="data/accounts.json">accounts.json</a>
+  <a href="data/profiles.json">profiles.json</a>
   <a href="sources.html">sources</a>
   <a href="servers.html">South America servers</a>
   <a href="data/meta.json">snapshot metadata</a>
 </footer>
 </main>
-<script src="app.js"></script>
 </body>
 </html>

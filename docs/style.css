@@ -37,6 +37,7 @@ a:hover { text-decoration: underline; }
 .site-header h1 { margin: 0 0 3px; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; }
 .site-header p { margin: 0; color: var(--muted); }
 .db-update { flex: 0 0 auto; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel); color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.db-update-secondary:not(:empty) { margin-top: 3px; opacity: .8; }
 
 .sticky-tools { position: sticky; top: 0; z-index: 20; margin: 0 -8px 10px; padding: 8px; background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid transparent; }
 .controls { display: grid; grid-template-columns: minmax(240px, 1fr) 210px; gap: 10px; }

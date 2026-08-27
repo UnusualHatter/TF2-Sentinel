@@ -20,17 +20,31 @@
 <div class="table-wrap"><table class="server-table"><thead><tr><th>Server</th><th>Country</th><th>Address</th><th>Public moderation data</th></tr></thead><tbody id="rows"></tbody></table></div>
 <footer class="site-footer"><a href="index.html">accounts</a><a href="sources.html">sources</a><a href="data/servers.json">servers.json</a></footer>
 </main>
+<script src="lib/sentinel-data.js" defer></script>
 <script>
 'use strict';
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
-Promise.all([fetch('data/servers.json').then(r=>r.json()),fetch('data/meta.json',{cache:'no-store'}).then(r=>r.json())]).then(([data,meta])=>{
- document.getElementById('last-update').textContent=`Last database update: ${meta.last_database_update_display||'—'}`;
- document.getElementById('rows').innerHTML=data.map(row=>{
- const linkLabel=/sourcebans|banlist/i.test(`${row.public_moderation_url||''} ${row.notes||''}`)?'Ban list':'Moderation site';
- const link=row.public_moderation_url?`<a href="${esc(row.public_moderation_url)}" target="_blank" rel="noreferrer">${linkLabel}</a>`:`<span class="muted">No public ban list located</span>`;
- const note=row.notes?`<div class="server-note">${esc(row.notes)}</div>`:'';
- return `<tr><td>${esc(row.server_name)}</td><td>${esc(row.country)}</td><td class="mono">${esc(row.address)}</td><td>${link}${note}</td></tr>`;
-}).join('');
+document.addEventListener('DOMContentLoaded', function () {
+  var esc = SentinelData.escapeHtml;
+  Promise.all([
+    fetch('data/servers.json').then(function (r) { return r.json(); }),
+    fetch('data/meta.json').then(function (r) { return r.json(); }).catch(function () { return {}; })
+  ]).then(function (loaded) {
+    var servers = loaded[0];
+    var meta = loaded[1];
+    document.getElementById('last-update').textContent =
+      'Last database update: ' + (meta.last_database_update_display || '\u2014');
+    document.getElementById('rows').innerHTML = servers.map(function (row) {
+      var url = SentinelData.safeUrl(row.public_moderation_url);
+      var label = /sourcebans|banlist/i.test((row.public_moderation_url || '') + ' ' + (row.notes || ''))
+        ? 'Ban list' : 'Moderation site';
+      var link = url
+        ? '<a href="' + esc(url) + '" target="_blank" rel="noreferrer">' + label + '</a>'
+        : '<span class="muted">No public ban list located</span>';
+      var note = row.notes ? '<div class="server-note">' + esc(row.notes) + '</div>' : '';
+      return '<tr><td>' + esc(row.server_name) + '</td><td>' + esc(row.country) + '</td>'
+        + '<td class="mono">' + esc(row.address) + '</td><td>' + link + note + '</td></tr>';
+    }).join('');
+  });
 });
 </script>
 </body>

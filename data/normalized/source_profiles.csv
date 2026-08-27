@@ -7,25 +7,25 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 6,72,moderate,megacheaterdb,true,false,curated-database,,
 7,8,very_weak,nullcore-membership,true,false,group-membership,,
 8,92,strong,rgl,true,false,league-conviction,,
-9,55,moderate,sleepy-bots,true,false,bot-list,,
-10,72,moderate,sleepy-bots,true,false,bot-list,,
-11,75,moderate,sleepy-bots,true,false,derived-merged-bot-list,,
-12,68,moderate,sleepy-bots,true,false,bot-list,,
-13,68,moderate,sleepy-bots,true,false,bot-list,,
-14,60,moderate,sleepy-bots,true,false,bot-list,,
-15,60,moderate,sleepy-bots,true,false,bot-list,,
-16,40,weak,sleepy-bots,true,false,mixed-group-list,,
-17,60,moderate,sleepy-bots,true,false,bot-list,,
-18,60,moderate,sleepy-bots,true,false,bot-list,,
-19,60,moderate,sleepy-bots,true,false,bot-list,,
-20,65,moderate,sleepy-bots,true,false,bot-list,,
-21,65,moderate,sleepy-bots,true,false,bot-list,,
-22,60,moderate,sleepy-bots,true,false,bot-list,,
-23,65,moderate,sleepy-bots,true,false,bot-list,,
-24,35,weak,sleepy-main,true,false,external-association,,
-25,20,weak,sleepy-main,true,false,misc,,
-26,25,weak,sleepy-main,true,false,no-proof,,
-27,75,moderate,sleepy-main,true,false,curated-player-list,,
+9,55,moderate,sleepy,true,false,bot-list,,
+10,72,moderate,sleepy,true,false,bot-list,,
+11,75,moderate,sleepy,true,false,derived-merged-bot-list,,
+12,68,moderate,sleepy,true,false,bot-list,,
+13,68,moderate,sleepy,true,false,bot-list,,
+14,60,moderate,sleepy,true,false,bot-list,,
+15,60,moderate,sleepy,true,false,bot-list,,
+16,40,weak,sleepy,true,false,mixed-group-list,,
+17,60,moderate,sleepy,true,false,bot-list,,
+18,60,moderate,sleepy,true,false,bot-list,,
+19,60,moderate,sleepy,true,false,bot-list,,
+20,65,moderate,sleepy,true,false,bot-list,,
+21,65,moderate,sleepy,true,false,bot-list,,
+22,60,moderate,sleepy,true,false,bot-list,,
+23,65,moderate,sleepy,true,false,bot-list,,
+24,35,weak,sleepy,true,false,external-association,,
+25,20,weak,sleepy,true,false,misc,,
+26,25,weak,sleepy,true,false,no-proof,,
+27,75,moderate,sleepy,true,false,curated-player-list,,
 28,88,strong,rentamedic-curated,true,false,curated-database,2026-08-12,
 29,0,none,rentamedic-aggregator,false,true,aggregator,2026-08-12,
 30,80,strong,skial,true,false,community-cheat-ban,2026-08-12,
@@ -60,7 +60,7 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 59,0,aggregator,reptf,false,true,provenance-aggregator,2026-08-12,Do not double count underlying community bans.
 60,75,moderate,horizon-australia,true,false,curated-playerlist,2026-08-12,Preserve cheater vs suspicious distinction from source.
 61,92,strong,nocrex-tom,true,false,reviewer-confirmed-report,2026-08-12,Treat as a source assertion backed by the project review process; preserve provenance and appeal/reversal state when available.
-62,85,strong,bots-tf,true,false,compiled-bot-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
+62,60,moderate,bots-tf,true,false,compiled-bot-list,2026-08-12,Compiled bot list reached through the lmaobox Lua transport. Not a mirror: 48% of the accounts it lists appear in no other registered source. Weighted with the other maintained bot lists rather than above them.
 63,10,very_weak,cheaterlist-association,true,true,association,2026-08-12,"Compiled copy of the d3fc0n6 CheaterFriend association list; same SteamID set as source 1, so it shares that independence group and weight."
 64,12,very_weak,tacobot,true,false,compiled-community-report-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
 65,92,strong,pazer-official,true,false,compiled-curated-list,2026-08-12,The Lua file is a compiled transport format; source-family independence is preserved by independence_group.
@@ -94,3 +94,11 @@ source_id,base_weight,evidence_class,independence_group,counts_toward_confidence
 93,78,strong,otaku-gaming-tf,true,false,community-cheat-ban,2026-08-19,"Only active explicit cheating/anti-cheat-detection reasons count; association, duplicate-account, evasion, conduct and exploit-abuse reasons are recorded as server_ban and contribute nothing. Recent-window sync (most recent banlist pages only, not the full historical archive)."
 94,75,strong,tf2-casual-fun,true,false,community-cheat-ban,2026-08-19,"Only active explicit cheating/anti-cheat-detection reasons count; association, duplicate-account, evasion, conduct and exploit-abuse reasons are recorded as server_ban and contribute nothing. Recent-window sync (most recent banlist pages only, not the full historical archive). This install marks expired and lifted bans, which are imported as inactive and excluded from the score."
 95,80,strong,ugc-gaming-net,true,false,community-cheat-ban,2026-08-19,"Only active explicit cheating/anti-cheat-detection reasons count; association, duplicate-account, evasion, conduct and exploit-abuse reasons are recorded as server_ban and contribute nothing. Recent-window sync (most recent banlist pages only, not the full historical archive)."
+96,40,moderate,randomperson407,true,false,bot-list,2026-08-26,
+97,78,strong,lbgaming,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+98,78,strong,liquid-tf,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+99,78,strong,pubs-tf,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+100,78,strong,retroservers,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+101,78,strong,sg-gaming,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+102,78,strong,sappho-io,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.
+103,78,strong,dpg-tf,true,false,community-ban-via-aggregator,2026-08-26,TF2 community not imported directly. Weighted below the communities whose ban list was read at the source.

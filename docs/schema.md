@@ -20,6 +20,14 @@ Each flag has a fixed multiplier defined in `db/init/005_confidence_views.sql`. 
 
 The score is designed to summarize corroboration, not to convert every imported list entry into a confirmed verdict.
 
+## Steam profile data
+
+Persona names and avatars are not part of the normalized database. They describe
+what Steam is serving right now, not what a source asserted, so they live in
+`docs/data/profiles.json` and are rebuilt on a schedule by
+`scripts/refresh_steam_profiles.py`. Keeping them out of the CSVs means a daily
+avatar refresh does not rewrite the evidence tables.
+
 ## Public view
 
 The static site consumes generated files under `docs/data/`. PostgreSQL consumers should generally start with `v_account_detail` or `v_effective_account` instead of reconstructing source joins themselves.

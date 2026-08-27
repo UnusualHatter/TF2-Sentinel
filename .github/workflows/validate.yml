@@ -74,8 +74,15 @@ jobs:
 
       - name: JS syntax
         run: |
+          node --check docs/lib/sentinel-data.js
           node --check docs/app.js
           node --check docs/sources.js
+
+      - name: Frontend unit tests
+        run: node --test tests/frontend/*.test.js
+
+      - name: Published profile cache is well formed
+        run: python3 scripts/check_profiles.py
 
       - name: Generated files match data/normalized/*.csv
         # summary.json / meta.json carry a generated_at timestamp so they're
@@ -85,9 +92,11 @@ jobs:
           mkdir /tmp/before
           cp data/normalized/confidence.csv data/normalized/account_summary.csv SOURCES.md /tmp/before/
           cp docs/data/accounts.json docs/data/sources.json /tmp/before/
+          cp docs/data/accounts.compact.json /tmp/before/
 
           python3 scripts/recompute_confidence.py
           python3 scripts/export_site_data.py
+          python3 scripts/build_site_bundle.py
           python3 scripts/generate_sources_md.py
 
           fail=0
@@ -103,4 +112,5 @@ jobs:
           check SOURCES.md
           check docs/data/accounts.json
           check docs/data/sources.json
+          check docs/data/accounts.compact.json
           exit $fail

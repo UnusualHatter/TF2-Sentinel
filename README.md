@@ -4,7 +4,7 @@ TF2 Sentinel is a searchable community database that combines public TF2 cheater
 
 **Website:** https://unusualhatter.github.io/TF2-Sentinel/
 
-**Current snapshot:** 36,307 SteamIDs · 54,317 source records · 95 sources · updated August 19, 2026.
+**Current snapshot:** 36,309 SteamIDs · 82,192 source records · 103 sources · updated August 26, 2026.
 
 ## Database
 
@@ -41,16 +41,29 @@ for anyone querying the data in PostgreSQL, and in
 database. The two are checked against each other and must always be
 changed together.
 
+## Steam profiles
+
+Persona names and avatars are refreshed daily from the Steam Web API by the
+`refresh steam profiles` workflow and published to `docs/data/profiles.json`.
+The website reads that one file, so a visitor never contacts Steam and the
+number of requests a page load makes does not grow with the database.
+
+Running the workflow on a fork needs a `STEAM_WEB_API_KEY` repository secret
+(Settings → Secrets and variables → Actions). The key is only ever read from
+the environment and is never part of anything published under `docs/`.
+
 ## Public data
 
 Apps and tools can use:
 
 - `docs/data/accounts.json`
+- `docs/data/profiles.json`
 - `docs/data/sources.json`
 - `docs/data/servers.json`
 - `docs/data/meta.json`
 
-Accounts are identified by `steamid64`.
+Accounts are identified by `steamid64`. [docs/API.md](docs/API.md) describes
+each file.
 
 ## Sources
 
